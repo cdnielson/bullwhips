@@ -1,0 +1,63 @@
+<style>
+
+    #left-nav {
+        width: 200px;
+    }
+    #content {
+        width: 800px;
+    }
+    #top-menu {
+        width: 1000px;
+    }
+    .menu-item {
+        padding-left: 20px;
+    }
+
+</style>
+<div id="main" class="layout vertical center">
+    <div class="layout horizontal center-justified"><img src="../web/images/title.png"/></div>
+    <div id="container" class="layout vertical center">
+        <div id="top-menu" class="layout horizontal end-justified">
+            <h3 class="menu-item" (click)="handleTopMenu('home')">Home</h3>
+            <h3 class="menu-item" (click)="handleTopMenu('about')">About</h3>
+            <h3 class="menu-item" (click)="handleTopMenu('contact')">Contact</h3>
+            <h3 class="menu-item" (click)="handleTopMenu('cart')">Cart</h3>
+        </div>
+        <div id="window" class="layout horizontal start-justified">
+            <div id="left-nav">
+                <h3 (click)="handleTopMenu('whips')">Whips</h3>
+                <h3 (click)="handleTopMenu('accessories')">Accessories</h3>
+            </div>
+            <div id="content">
+                <div [ngSwitch]="page">
+                    <div *ngSwitchWhen="'home'">
+                        <h3>Home</h3>
+                        <h4>Welcome to Folk Prophet Bullwhips</h4>
+                        <p>a division of Folk Prophet LLC</p>
+                    </div>
+                    <div *ngSwitchWhen="'about'">
+                        <h3>About</h3>
+                        Folk Prophet Bullwhips makes handmade bullwhips by order.
+                    </div>
+                    <div *ngSwitchWhen="'contact'">
+                        <h3>Contact</h3>
+                        Charles Nielson Bullwhips
+                        cdnielson@folkprophet.com
+                        folkprophet@folkprophet.com
+                    </div>
+                    <div *ngSwitchWhen="'whips'">
+                        <h3>Whips</h3>
+                        <p>8' 12 plait</p>
+                        <p>10' 12 plait</p>
+                    </div>
+                    <div *ngSwitchWhen="'accessories'">
+                        <h3>Accessories</h3>
+                        <p>Poppers/Crackers</p>
+                        <p>Falls</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
