@@ -12,36 +12,39 @@
     .menu-item {
         padding-left: 20px;
     }
+    .pointer {
+        cursor: pointer;
+    }
 
 </style>
 <div id="main" class="layout vertical center">
-    <div class="layout horizontal center-justified"><img src="../web/images/title.png"/></div>
+    <div class="layout horizontal center-justified"><img [src]="pathToLogo"/></div>
     <div id="container" class="layout vertical center">
         <div id="top-menu" class="layout horizontal end-justified">
-            <h3 class="menu-item" (click)="handleTopMenu('home')">Home</h3>
-            <h3 class="menu-item" (click)="handleTopMenu('about')">About</h3>
-            <h3 class="menu-item" (click)="handleTopMenu('contact')">Contact</h3>
-            <h3 class="menu-item" (click)="handleTopMenu('cart')">Cart</h3>
+            <h3 class="menu-item pointer" (click)="handleTopMenu('home')">HOME</h3>
+            <h3 class="menu-item pointer" (click)="handleTopMenu('about')">ABOUT</h3>
+            <h3 class="menu-item pointer" (click)="handleTopMenu('contact')">CONTACT</h3>
+            <h3 class="menu-item pointer" (click)="handleTopMenu('cart')">CART</h3>
         </div>
         <div id="window" class="layout horizontal start-justified">
             <div id="left-nav">
-                <h3 (click)="handleTopMenu('whips')">Whips</h3>
-                <h3 (click)="handleTopMenu('accessories')">Accessories</h3>
+                <h3 (click)="handleTopMenu('whips')" class="pointer">Whips</h3>
+                <h3 (click)="handleTopMenu('accessories')" class="pointer">Accessories</h3>
             </div>
             <div id="content">
                 <div [ngSwitch]="page">
                     <div *ngSwitchWhen="'home'">
                         <h3>Home</h3>
-                        <h4>Welcome to Folk Prophet Bullwhips</h4>
+                        <h4>Welcome to Folk Prophet Whips</h4>
                         <p>a division of Folk Prophet LLC</p>
                     </div>
                     <div *ngSwitchWhen="'about'">
                         <h3>About</h3>
-                        Folk Prophet Bullwhips makes handmade bullwhips by order.
+                        Folk Prophet Whips makes handmade whips by order.
                     </div>
                     <div *ngSwitchWhen="'contact'">
                         <h3>Contact</h3>
-                        Charles Nielson Bullwhips
+                        Folk Prophet Whips
                         cdnielson@folkprophet.com
                         folkprophet@folkprophet.com
                     </div>
@@ -54,6 +57,10 @@
                         <h3>Accessories</h3>
                         <p>Poppers/Crackers</p>
                         <p>Falls</p>
+                    </div>
+                    <div *ngSwitchWhen="'cart'">
+                        <h3>Cart</h3>
+                        <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right:7px;">
                     </div>
                 </div>
 

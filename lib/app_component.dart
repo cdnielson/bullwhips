@@ -6,6 +6,7 @@ import 'package:angular2/core.dart';
 @Component(selector: 'my-app', templateUrl: 'app_component.html')
 class AppComponent {
   String page = "home";
+  String get pathToLogo => "images/title.png";
 
   handleTopMenu(page) {
     this.page = page;
