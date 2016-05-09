@@ -50,13 +50,14 @@
                     </div>
                     <div *ngSwitchWhen="'whips'">
                         <h3>Whips</h3>
-                        <p>8' 12 plait</p>
-                        <p>10' 12 plait</p>
+                        <p>8' 12 plait</p><button (click)="addToCart('8')">Add to Cart</button>
+                        <p>10' 12 plait</p><button (click)="addToCart('10')">Add to Cart</button>
+                        <p>Customize</p><button (click)="addToCart('custom')">Add to Cart</button>
                     </div>
                     <div *ngSwitchWhen="'accessories'">
                         <h3>Accessories</h3>
-                        <p>Poppers/Crackers</p>
-                        <p>Falls</p>
+                        <p>Poppers/Crackers</p><button (click)="addToCart('popper')">Add to Cart</button>
+                        <p>Falls</p><button (click)="addToCart('fall')">Add to Cart</button>
                     </div>
                     <div *ngSwitchWhen="'cart'">
                         <h3>Cart</h3>
