@@ -50,17 +50,51 @@
                     </div>
                     <div *ngSwitchWhen="'whips'">
                         <h3>Whips</h3>
-                        <p>8' 12 plait</p><button (click)="addToCart('8')">Add to Cart</button>
-                        <p>10' 12 plait</p><button (click)="addToCart('10')">Add to Cart</button>
-                        <p>Customize</p><button (click)="addToCart('custom')">Add to Cart</button>
+                        <div class="layout horizontal around-justified wrap">
+                            <div *ngFor="#whip of whips" class="layout vertical center">
+                                <img [src]="whip.image"/>
+                                <span>{{whip.description}}</span>
+                                <span>{{whip.price}}</span>
+                                <button (click)="addToCart(whip.description)">Add to Cart</button>
+                            </div>
+                        </div>
                     </div>
                     <div *ngSwitchWhen="'accessories'">
                         <h3>Accessories</h3>
-                        <p>Poppers/Crackers</p><button (click)="addToCart('popper')">Add to Cart</button>
-                        <p>Falls</p><button (click)="addToCart('fall')">Add to Cart</button>
+                        <div class="layout horizontal around-justified wrap">
+                            <div *ngFor="#accessory of accessories" class="layout vertical center">
+                                <img [src]="accessory.image"/>
+                                <span>{{accessory.description}}</span>
+                                <span>{{accessory.price}}</span>
+                                <button (click)="addToCart(accessory.description)">Add to Cart</button>
+                            </div>
+                        </div>
                     </div>
                     <div *ngSwitchWhen="'cart'">
+
                         <h3>Cart</h3>
+
+                        <div *ngFor="#item of cart; #i = index">
+                            <div class="row">
+                                <div  class="col-md-2">{{item.name}}</div>
+                                <div class="col-md-10">
+                                    <select [(ngModel)]="item.quantity" #dropdown (change)="handleQuantityDropdown(item.name, dropdown.value)" >
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                        <br>
                         <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right:7px;">
                     </div>
                 </div>

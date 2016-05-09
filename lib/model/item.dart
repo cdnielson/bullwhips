@@ -1,6 +1,8 @@
+library item;
+
 class Item {
   String name;
-  int amount;
+  int quantity;
 
-  Item (this.name, this.amount);
+  Item (this.name, this.quantity);
 }
