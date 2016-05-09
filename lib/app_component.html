@@ -78,24 +78,34 @@
                             <div class="row">
                                 <div  class="col-md-2">{{item.name}}</div>
                                 <div class="col-md-10">
-                                    <select [(ngModel)]="item.quantity" #dropdown (change)="handleQuantityDropdown(item.name, dropdown.value)" >
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                    </select>
+                                    <div [ngSwitch]="tenOrMore">
+                                        <div *ngSwitchWhen="'one'">
+                                            <select [(ngModel)]="item.quantity" #dropdown (change)="handleQuantityDropdown(item.name, dropdown.value)" >
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10+</option>
+                                            </select>
+                                        </div>
+                                        <div *ngSwitchWhen="'ten'">
+                                            <input [(ngModel)]="item.quantity" #ten (click)="handleQuantityDropdown(item.name, ten.value)"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <hr>
                         </div>
                         <br>
                         <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right:7px;">
+                    </div>
+                    <div *ngSwitchWhen="'custom'">
+                        <h3>Custom Whip</h3>
                     </div>
                 </div>
 

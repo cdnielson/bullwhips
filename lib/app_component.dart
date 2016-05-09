@@ -11,6 +11,7 @@ import 'dart:convert';
 class AppComponent {
   static const String PATH_TO_PRODUCTS = "data/products.json";
   String page = "home";
+  String tenOrMore = "one";
   String get pathToLogo => "images/title.png";
   List<Item> cart = [];
   List<Product> whips = [];
@@ -20,7 +21,7 @@ class AppComponent {
     HttpRequest.getString(PATH_TO_PRODUCTS).then(parseProducts);
   }
   parseProducts(data) {
-    List<map> mapList = JSON.decode(data);
+    List<Map> mapList = JSON.decode(data);
     List<Product> productList = mapList.map((Map element) => new Product.fromMap(element)).toList();
     whips = productList.where((Product element) => element.category == "whip").toList();
     accessories = productList.where((Product element) => element.category == "accessory").toList();
@@ -43,6 +44,11 @@ class AppComponent {
     return false;
   }
   handleQuantityDropdown(name, value) {
+    if (value == "10") {
+      tenOrMore = "ten";
+    } else {
+      tenOrMore = "one";
+    }
     Item currentItem = cart.where((Item element) => element.name == name).first;
     currentItem.quantity = int.parse(value);
     print(value);
