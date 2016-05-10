@@ -1,0 +1,77 @@
+<div id="contact" class="spacing white">
+    <h2>Contact Folk Prophet Whips</h2>
+    <br>
+    <div class="text-center">
+        <h4>Questions? Concerns? Just want to chat?</h4>
+
+        <h4>Call us at: 801-885-6258</h4>
+
+        <h4 class="text-center">or fill out the form below:</h4>
+    </div>
+
+    <form class="form" [action]="pathToContact" method="post">
+        <div class="form-group">
+
+
+            <div id="name" class="container-fluid">
+
+                <div class="row">
+                    <div class="form-group col-md-2">
+                        <label for="date">Date</label>
+                        <input type="date" class="form-control" id="date" name="date" required>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="firstname">First Name</label>
+                        <input type="text" id="firstname" name="firstname" class="form-control" placeholder="First Name" required>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="lastname">Last Name</label>
+                        <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Last Name" required>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="form-group col-md-4">
+                        <label for="email">Email Address</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="phone">Phone</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="zip">Zip</label>
+                        <input type="text" class="form-control" id="zip" name="zip" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        How can we help you?*
+                        <textarea class="form-control" rows="4" name="message" required></textarea>
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-default">Send Message</button>
+            </div>
+        </div>
+    </form>
+    <hr>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Location</h3>
+
+                <p>Folk Prophet Whips
+                    <br>3536 South Hawk Drive
+                    <br>Saratoga Springs, Utah 84045
+                    <br>Phone: 801-885-6258</p>
+                <a href="mailto:folkprophet@folkprophet.com">folkprophet@folkprophet.com</a>
+                <br>
+                <a href="mailto:cdnielson@folkprophet.com">cdnielson@folkprophet.com</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<hr>

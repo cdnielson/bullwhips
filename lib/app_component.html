@@ -15,72 +15,84 @@
     .pointer {
         cursor: pointer;
     }
+    .thumbnail {
+        width: 200px;
+    }
+    #zoomed {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10000;
+        padding: 20px;
+        border: 1px solid black;
+        background: white;
+        height: 100vh;
+    }
 
 </style>
 <div id="main" class="layout vertical center">
     <div class="layout horizontal center-justified"><img [src]="pathToLogo"/></div>
     <div id="container" class="layout vertical center">
         <div id="top-menu" class="layout horizontal end-justified">
-            <h3 class="menu-item pointer" (click)="handleTopMenu('home')">HOME</h3>
-            <h3 class="menu-item pointer" (click)="handleTopMenu('about')">ABOUT</h3>
-            <h3 class="menu-item pointer" (click)="handleTopMenu('contact')">CONTACT</h3>
-            <h3 class="menu-item pointer" (click)="handleTopMenu('cart')">CART</h3>
+            <div *ngFor="let item of topMenu">
+                <h3 class="menu-item pointer" (click)="handleTopMenu(item.title)">{{item.title}}</h3>
+            </div>
         </div>
         <div id="window" class="layout horizontal start-justified">
             <div id="left-nav">
-                <h3 (click)="handleTopMenu('whips')" class="pointer">Whips</h3>
-                <h3 (click)="handleTopMenu('accessories')" class="pointer">Accessories</h3>
+                <div *ngFor="let item of sideMenu">
+                    <h3 (click)="handleTopMenu(item.title)" class="pointer">{{item.title}}</h3>
+                </div>
             </div>
             <div id="content">
                 <div [ngSwitch]="page">
-                    <div *ngSwitchWhen="'home'">
+                    <div *ngSwitchWhen="'HOME'">
                         <h3>Home</h3>
                         <h4>Welcome to Folk Prophet Whips</h4>
                         <p>a division of Folk Prophet LLC</p>
                     </div>
-                    <div *ngSwitchWhen="'about'">
+                    <div *ngSwitchWhen="'ABOUT'">
                         <h3>About</h3>
                         Folk Prophet Whips makes handmade whips by order.
                     </div>
-                    <div *ngSwitchWhen="'contact'">
-                        <h3>Contact</h3>
-                        Folk Prophet Whips
-                        cdnielson@folkprophet.com
-                        folkprophet@folkprophet.com
+                    <div *ngSwitchWhen="'CONTACT'">
+                        <contact-page></contact-page>
                     </div>
-                    <div *ngSwitchWhen="'whips'">
+                    <div *ngSwitchWhen="'Whips'">
                         <h3>Whips</h3>
                         <div class="layout horizontal around-justified wrap">
-                            <div *ngFor="#whip of whips" class="layout vertical center">
-                                <img [src]="whip.image"/>
+                            <div *ngFor="let whip of whips" class="layout vertical center">
+                                <img class="thumbnail" [src]="pathToImages + whip.image" (click)="zoom(whip.image)"/>
                                 <span>{{whip.description}}</span>
-                                <span>{{whip.price}}</span>
-                                <button (click)="addToCart(whip.description)">Add to Cart</button>
+                                <span>${{whip.price}}</span>
+                                <button  class="btn btn-default" (click)="addToCart(whip.description)">Add to Cart</button>
                             </div>
                         </div>
                     </div>
-                    <div *ngSwitchWhen="'accessories'">
+                    <div *ngSwitchWhen="'Accessories'">
                         <h3>Accessories</h3>
                         <div class="layout horizontal around-justified wrap">
-                            <div *ngFor="#accessory of accessories" class="layout vertical center">
-                                <img [src]="accessory.image"/>
+                            <div *ngFor="let accessory of accessories" class="layout vertical center">
+                                <img class="thumbnail" [src]="pathToImages + accessory.image" (click)="zoom(accessory.image)"/>
                                 <span>{{accessory.description}}</span>
-                                <span>{{accessory.price}}</span>
-                                <button (click)="addToCart(accessory.description)">Add to Cart</button>
+                                <span>${{accessory.price}}</span>
+                                <button  class="btn btn-default" (click)="addToCart(accessory.description)">Add to Cart</button>
                             </div>
                         </div>
                     </div>
-                    <div *ngSwitchWhen="'cart'">
+                    <div *ngSwitchWhen="'CART'">
 
                         <h3>Cart</h3>
 
-                        <div *ngFor="#item of cart; #i = index">
+                        <div *ngFor="let item of cart; let i = index">
                             <div class="row">
-                                <div  class="col-md-2">{{item.name}}</div>
-                                <div class="col-md-10">
+                                <div  class="col-md-2">{{item.description}}</div>
+                                <div  class="col-md-2">${{item.price}}</div>
+                                <div class="col-md-2">
                                     <div [ngSwitch]="tenOrMore">
                                         <div *ngSwitchWhen="'one'">
-                                            <select [(ngModel)]="item.quantity" #dropdown (change)="handleQuantityDropdown(item.name, dropdown.value)" >
+                                            <select [(ngModel)]="item.quantity" #dropdown (change)="handleQuantityDropdown(item.description, dropdown.value)" >
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -90,19 +102,31 @@
                                                 <option value="7">7</option>
                                                 <option value="8">8</option>
                                                 <option value="9">9</option>
-                                                <option value="10">10+</option>
+                                                <option value="10">10</option>
                                             </select>
                                         </div>
+
                                         <div *ngSwitchWhen="'ten'">
-                                            <input [(ngModel)]="item.quantity" #ten (click)="handleQuantityDropdown(item.name, ten.value)"/>
+                                            <input [(ngModel)]="item.quantity" #ten (change)="handleQuantityDropdown(item.description, ten.value)"/>
                                         </div>
                                     </div>
                                 </div>
+                                <a href="#" class="col-md-6 pointer" (click)="removeItem(item.description)">Delete</a>
                             </div>
                             <hr>
                         </div>
+                        <div>Subtotal: ${{subtotal}}</div>
+                        <div>Shipping: ${{shipping}}</div>
+                        <div>Total: ${{total}}</div>
                         <br>
                         <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right:7px;">
+                        <button class="btn btn-default" (click)="continueShopping()">Continue Shopping</button>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <p>To order more than 10 of any item, please email <a href="mailto:cdnielson@folkprophet.com">cdnielson@folkprophet.com</a> or contact us through our <a href="#" (click)="handleTopMenu('CONTACT')">contact page</a>.</p>
                     </div>
                     <div *ngSwitchWhen="'custom'">
                         <h3>Custom Whip</h3>
@@ -113,3 +137,4 @@
         </div>
     </div>
 </div>
+<div id="zoomed" [hidden]="hideZoom" class="layout vertical center"><img style="height: 100%;" [src]="zoomImage" (click)="closeZoom()"/>click/tap to close</div>
