@@ -2,7 +2,8 @@ library menu;
 
 class Menu {
   final String title;
-  final bool selected;
+  String style;
 
-  Menu(String this.title, bool this.selected);
+
+  Menu(String this.title, String this.style);
 }

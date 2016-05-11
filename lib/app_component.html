@@ -1,14 +1,58 @@
 <style>
 
-    #left-nav {
-        width: 200px;
+    #left-nav-large {
+        display: flex;
+        width: 16vw;
+        margin-left: 10vw;
+    }
+    #left-nav-small{
+        display: none;
+    }
+    #top-menu-large {
+        display: flex;
+        width: 80vw;
+    }
+    #top-menu-small {
+        display: none;
+    }
+    #menus-small {
+        display: none;
     }
     #content {
-        width: 800px;
+        width: 60vw;
+        margin-right: 10vw;
+        margin-left: 2vw;
+        padding-left: 2vw;
+        padding-bottom: 20px;
+        background: white;
     }
-    #top-menu {
-        width: 1000px;
+    @media screen and (max-width: 925px) {
+        #left-nav-large {
+            display: none;
+        }
+        #left-nav-small {
+            width: 100vw;
+            display: flex;
+        }
+        #top-menu-large {
+            display: none;
+        }
+        #top-menu-small {
+            display: flex;
+            width: 100vw;
+        }
+        #content {
+            width: 100vw;
+            padding: 10vw;
+            margin-right: 10vw;
+            margin-left: 10vw;
+        }
+        #menus-small {
+            display: inline;
+        }
     }
+
+
     .menu-item {
         padding-left: 20px;
     }
@@ -29,59 +73,95 @@
         background: white;
         height: 100vh;
     }
+    .selected {
+        color: black;
+    }
+    .notselected {
+        color: gray;
+    }
+    .hamburger {
+        background-color: black;
+        width: 50px;
+        height: 5px;
+        margin-bottom: 5px;
+    }
 
 </style>
 <div id="main" class="layout vertical center">
-    <div class="layout horizontal center-justified"><img [src]="pathToLogo"/></div>
+    <img [src]="pathToLogo" style="width: 100%; max-width: 1000px;" class="center-block"/>
     <div id="container" class="layout vertical center">
-        <div id="top-menu" class="layout horizontal end-justified">
+        <!--small screen menus-->
+        <div id="menus-small">
+            <div [hidden]="menuOpened">
+                <div (click)="openMenu()">
+                    <div class="hamburger"></div>
+                    <div class="hamburger"></div>
+                    <div class="hamburger"></div>
+                </div>
+            </div>
+            <div [hidden]="!menuOpened">
+                <div id="left-nav-small" class="layout vertical center">
+                    <div *ngFor="let item of sideMenu">
+                        <h3 (click)="handleMenu(item.title, 'side')" [ngStyle]="{'color': item.style}" class="pointer">{{item.title}}</h3>
+                    </div>
+                </div>
+                <div id="top-menu-small" class="layout vertical center">
+                    <div *ngFor="let item of topMenu">
+                        <h3 class="pointer" [ngStyle]="{'color': item.style}" (click)="handleMenu(item.title, 'top')">{{item.title}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--large screen menus-->
+        <div id="top-menu-large" class="layout horizontal end-justified">
             <div *ngFor="let item of topMenu">
-                <h3 class="menu-item pointer" (click)="handleTopMenu(item.title)">{{item.title}}</h3>
+                <h3 (click)="handleMenu(item.title, 'top')" [ngStyle]="{'color': item.style}" class="menu-item pointer">{{item.title}}</h3>
             </div>
         </div>
         <div id="window" class="layout horizontal start-justified">
-            <div id="left-nav">
+            <div id="left-nav-large" class="layout vertical start-justified">
                 <div *ngFor="let item of sideMenu">
-                    <h3 (click)="handleTopMenu(item.title)" class="pointer">{{item.title}}</h3>
+                    <h3 (click)="handleMenu(item.title, 'side')" [ngStyle]="{'color': item.style}" class="pointer">{{item.title}}</h3>
                 </div>
             </div>
             <div id="content">
                 <div [ngSwitch]="page">
-                    <div *ngSwitchWhen="'HOME'">
+                    <div *ngSwitchWhen="'HOME'" id="home">
                         <h3>Home</h3>
                         <h4>Welcome to Folk Prophet Whips</h4>
                         <p>a division of Folk Prophet LLC</p>
                     </div>
-                    <div *ngSwitchWhen="'ABOUT'">
+                    <div *ngSwitchWhen="'ABOUT'" id="about">
                         <h3>About</h3>
                         Folk Prophet Whips makes handmade whips by order.
                     </div>
-                    <div *ngSwitchWhen="'CONTACT'">
+                    <div *ngSwitchWhen="'CONTACT'" id="contact">
                         <contact-page></contact-page>
                     </div>
-                    <div *ngSwitchWhen="'Whips'">
+                    <div *ngSwitchWhen="'WHIPS'" id="whips">
                         <h3>Whips</h3>
                         <div class="layout horizontal around-justified wrap">
                             <div *ngFor="let whip of whips" class="layout vertical center">
-                                <img class="thumbnail" [src]="pathToImages + whip.image" (click)="zoom(whip.image)"/>
+                                <img class="thumbnail" [src]="pathToThumbnails + whip.image" (click)="zoom(whip.image)"/>
                                 <span>{{whip.description}}</span>
                                 <span>${{whip.price}}</span>
                                 <button  class="btn btn-default" (click)="addToCart(whip.description)">Add to Cart</button>
                             </div>
                         </div>
                     </div>
-                    <div *ngSwitchWhen="'Accessories'">
+                    <div *ngSwitchWhen="'ACCESSORIES'" id="accessories">
                         <h3>Accessories</h3>
                         <div class="layout horizontal around-justified wrap">
                             <div *ngFor="let accessory of accessories" class="layout vertical center">
-                                <img class="thumbnail" [src]="pathToImages + accessory.image" (click)="zoom(accessory.image)"/>
+                                <img class="thumbnail" [src]="pathToThumbnails + accessory.image" (click)="zoom(accessory.image)"/>
                                 <span>{{accessory.description}}</span>
                                 <span>${{accessory.price}}</span>
                                 <button  class="btn btn-default" (click)="addToCart(accessory.description)">Add to Cart</button>
                             </div>
                         </div>
                     </div>
-                    <div *ngSwitchWhen="'CART'">
+                    <div *ngSwitchWhen="'CART'" id="cart">
 
                         <h3>Cart</h3>
 
@@ -90,26 +170,18 @@
                                 <div  class="col-md-2">{{item.description}}</div>
                                 <div  class="col-md-2">${{item.price}}</div>
                                 <div class="col-md-2">
-                                    <div [ngSwitch]="tenOrMore">
-                                        <div *ngSwitchWhen="'one'">
-                                            <select [(ngModel)]="item.quantity" #dropdown (change)="handleQuantityDropdown(item.description, dropdown.value)" >
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
-                                            </select>
-                                        </div>
-
-                                        <div *ngSwitchWhen="'ten'">
-                                            <input [(ngModel)]="item.quantity" #ten (change)="handleQuantityDropdown(item.description, ten.value)"/>
-                                        </div>
-                                    </div>
+                                    <select [(ngModel)]="item.quantity" #dropdown (change)="handleQuantityDropdown(item.description, dropdown.value)" >
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
                                 </div>
                                 <a href="#" class="col-md-6 pointer" (click)="removeItem(item.description)">Delete</a>
                             </div>
@@ -119,16 +191,17 @@
                         <div>Shipping: ${{shipping}}</div>
                         <div>Total: ${{total}}</div>
                         <br>
-                        <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right:7px;">
+                        <span>Payment options coming soon. If you want to order a whip, please use the contact form or email us.</span>
+                        <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right:7px;" (click)="payIt()"/>
                         <button class="btn btn-default" (click)="continueShopping()">Continue Shopping</button>
                         <br>
                         <br>
                         <br>
                         <br>
                         <br>
-                        <p>To order more than 10 of any item, please email <a href="mailto:cdnielson@folkprophet.com">cdnielson@folkprophet.com</a> or contact us through our <a href="#" (click)="handleTopMenu('CONTACT')">contact page</a>.</p>
+                        <p>To order more than 10 of any item, please email <a href="mailto:cdnielson@folkprophet.com">cdnielson@folkprophet.com</a> or contact us through our <a href="#" (click)="handleMenu('CONTACT', 'top')">contact page</a>.</p>
                     </div>
-                    <div *ngSwitchWhen="'custom'">
+                    <div *ngSwitchWhen="'CUSTOM'">
                         <h3>Custom Whip</h3>
                     </div>
                 </div>
@@ -137,4 +210,4 @@
         </div>
     </div>
 </div>
-<div id="zoomed" [hidden]="hideZoom" class="layout vertical center"><img style="height: 100%;" [src]="zoomImage" (click)="closeZoom()"/>click/tap to close</div>
+<div id="zoomed" [hidden]="hideZoom" class="layout vertical center"><img style="width: 90%; max-height: 1000px;" [src]="zoomImage" (click)="closeZoom()"/>click/tap to close</div>

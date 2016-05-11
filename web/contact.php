@@ -1,39 +1,27 @@
-<html>
-<body>
-
 <?php
-echo 'Date: ' . $_POST["date"];
-echo "<br>";
-echo 'First Name: ' .  $_POST["firstname"];
-echo "<br>";
-echo 'Last Name: ' . $_POST["lastname"];
-echo "<br>";
-echo 'Email: ' . $_POST["email"];
-echo "<br>";
-echo 'Phone: ' . $_POST["phone"];
-echo "<br>";
-echo 'Zip: ' . $_POST["zip"];
-echo "<br>";
-echo 'Message: ' . $_POST["message"];
+$inputdata = @file_get_contents('php://input');
+$result = json_decode($inputdata);
 
-$email =  $_POST["email"];
-$name =  $_POST["firstname"] . " " . $_POST["lastname"];
+$date = $result->date;
+$firstName = $result->firstName;
+$lastName = $result->lastName;
+$email = $result->email;
+$phone = $result->phone;
+$message = $result->message;
 
-$body = 'Date: ' . $_POST["date"] .
+$name =  $firstName . " " . $lastName;
+
+$body = 'Date: ' . $date .
     '<br>
-First Name: ' .  $_POST["firstname"] .
+First Name: ' .  $firstName .
     '<br>
-Last Name: ' . $_POST["lastname"] .
+Last Name: ' . $lastName .
     '<br>
-Email: ' . $_POST["email"] .
+Email: ' . $email .
     '<br>
-Phone: ' . $_POST["phone"] .
+Phone: ' . $phone .
     '<br>
-Zip: ' . $_POST["zip"] .
-    '<br>
-Contact by: ' . $_POST["contacted"] .
-    '<br>
-Message: ' . $_POST["message"];
+Message: ' . $message;
 ?>
 
 
@@ -67,7 +55,7 @@ $mail->AltBody = $body;
 if (!$mail->send()) {
     echo "Mailer Error: " . $mail->ErrorInfo;
 } else {
-    echo "<br>Message sent!<br><button><a href='http://folkprophet.com/whips'>Home</a></button></body></html>";
+    echo $body;
 }
 
 ?>
