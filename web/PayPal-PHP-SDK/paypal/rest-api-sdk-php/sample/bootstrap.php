@@ -30,10 +30,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 // Replace these values by entering your own ClientId and Secret by visiting https://developer.paypal.com/webapps/developer/applications/myapps
-
-//CN these are my sandbox creds
-$clientId = 'AUfYsD88MkBeGv4kz78fHRyg_-OKW1WndNs1VioiWWpcKaWdrtjMal3rARDPiKiu676fOlB1lFvBef-I';
-$clientSecret = 'EBPhXA4_J9UCk5V2CBlqvJB9y8IFJmyO72Fda-tc_AVeSun0jvQ8wfkUVFkFl8x2W1v9xQCQXRDGbo-D';
+$clientId = 'AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS';
+$clientSecret = 'EGnHDxD_qRPdaLdZz8iCr8N7_MzF-YHPTkjs6NKYQvQSBngp4PTTVWkPZRbL';
 
 /**
  * All default curl options are stored in the array inside the PayPalHttpConfig class. To make changes to those settings

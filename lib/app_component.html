@@ -63,15 +63,17 @@
         width: 200px;
     }
     #zoomed {
+        padding: 20px;
+        border: 1px solid black;
+        background: white;
+        height: 100vh;
+    }
+    .popup {
         position: fixed;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
         z-index: 10000;
-        padding: 20px;
-        border: 1px solid black;
-        background: white;
-        height: 100vh;
     }
     .selected {
         color: black;
@@ -192,7 +194,7 @@
                         <div>Total: ${{total}}</div>
                         <br>
                         <span>Payment options coming soon. If you want to order a whip, please use the contact form or email us.</span>
-                        <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right:7px;" />
+                        <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right:7px;" (click)="payIt()"/>
 
                         <button class="btn btn-default" (click)="continueShopping()">Continue Shopping</button>
                         <br>
@@ -211,4 +213,5 @@
         </div>
     </div>
 </div>
-<div id="zoomed" [hidden]="hideZoom" class="layout vertical center"><img style="width: 90%; max-height: 1000px;" [src]="zoomImage" (click)="closeZoom()"/>click/tap to close</div>
+<div id="zoomed" [hidden]="hideZoom" class="layout vertical center popup"><img style="width: 90%; max-height: 1000px;" [src]="zoomImage" (click)="closeZoom()"/>click/tap to close</div>
+<div id="processing" [hidden]="hideProcessing" class="layout vertical center popup">Processing...</div>

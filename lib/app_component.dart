@@ -36,6 +36,8 @@ class AppComponent {
   DivElement content;
   bool menuOpened = false;
   String get paymentsPHP => "payments.php";
+  static const String PATH_TO_PAYPAL_PHP = "php/order_place.php";
+  bool hideProcessing = true;
 
   AppComponent() {
     HttpRequest.getString(PATH_TO_PRODUCTS).then(parseProducts);
@@ -127,22 +129,38 @@ class AppComponent {
     menuOpened = true;
   }
   payIt() {
-    Map keys = {
-      'username':'AUfYsD88MkBeGv4kz78fHRyg_-OKW1WndNs1VioiWWpcKaWdrtjMal3rARDPiKiu676fOlB1lFvBef-I',
-      'password':'EBPhXA4_J9UCk5V2CBlqvJB9y8IFJmyO72Fda-tc_AVeSun0jvQ8wfkUVFkFl8x2W1v9xQCQXRDGbo-D'
-    };
-//    Found: request(url, method, withCredentials, responseType, mimeType, requestHeaders, sendData, onProgress
+    /*var data =
+      {"amounts":{
+        "shipping":"15",
+        "currency":"USD"
+      },
+      "items_list":[
+          {
+            "name":"poppers (5)",
+            "quantity":"1",
+            "sku":"12345",
+            "price":"5",
+          },
+          {
+            "name":"whip",
+            "quantity":"1",
+            "sku":"12343",
+            "price":"700",
+          }
+        ]
+      };
 
-    HttpRequest.request(
-        'https://api.sandbox.paypal.com/v1/oauth2/token',
-        method: 'POST',
-        withCredentials: true,
-        mimeType: 'application/x-www-form-urlencoded',
-        sendData: keys
-    ).catchError((obj) {
+    var datasend = JSON.encode(data);
+
+    hideProcessing = false;
+    HttpRequest.request(PATH_TO_PAYPAL_PHP, method: 'POST', mimeType: 'application/json', sendData: datasend).catchError((obj) {
       //print(obj);
-    }).then((HttpRequest val) {
+    }).then((val) {
       print(val.responseText);
-    }, onError: (e) => print("error"));
+      hideProcessing = true;
+    }, onError: (e) => print("error"));*/
+    int orderAmount = 500;
+
+    window.location.replace("$PATH_TO_PAYPAL_PHP?order_amount=$orderAmount");
   }
 }
