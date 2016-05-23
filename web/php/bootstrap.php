@@ -29,8 +29,8 @@ function getApiContext() {
     }
 
     $apiContext = new ApiContext(new OAuthTokenCredential(
-        'CAHUAfrYLseDS8L8OMvkeBSeBGrvy4oknzy78fHRyg_-OKW1WndNs1VioiWWpcKaWdrtjMal3rARDPiKiu676fOlB1lFvBef-I', //client
-        'ECBhPAhrXLAE4S_AJN9DUBCrky5OVN2YCBlqvJB9y8IFJmyO72Fda-tc_AVeSun0jvQ8wfkUVFkFl8x2W1v9xQCQXRDGbo-D' //secret
+        'AUfYsD88MkBeGv4kz78fHRyg_-OKW1WndNs1VioiWWpcKaWdrtjMal3rARDPiKiu676fOlB1lFvBef-I', //client
+        'EBPhXA4_J9UCk5V2CBlqvJB9y8IFJmyO72Fda-tc_AVeSun0jvQ8wfkUVFkFl8x2W1v9xQCQXRDGbo-D' //secret
     ));
 
 
