@@ -194,6 +194,9 @@
                         <div>Total: ${{total}}</div>
                         <br>
                         <span>Payment options coming soon. If you want to order a whip, please use the contact form or email us.</span>
+                        First Name<input type="text" [(ngModel)]="firstName"/>
+                        Last Name<input type="text" [(ngModel)]="lastName"/>
+                        email<input type="text" [(ngModel)]="email"/>
                         <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right:7px;" (click)="payIt()"/>
 
                         <button class="btn btn-default" (click)="continueShopping()">Continue Shopping</button>

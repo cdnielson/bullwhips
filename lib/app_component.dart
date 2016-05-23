@@ -40,6 +40,9 @@ class AppComponent {
   static const String PATH_TO_DB_PHP = "php/order_to_db.php";
   bool hideProcessing = true;
   String orderId;
+  String firstName;
+  String lastName;
+  String email;
 
   AppComponent() {
     HttpRequest.getString(PATH_TO_PRODUCTS).then(parseProducts);
@@ -135,7 +138,12 @@ class AppComponent {
   payIt() {
     if (total > 0) {
       var data =
-        {"amounts":{
+        {"customer":{
+          "firstName":firstName,
+          "lastName":lastName,
+          "email":email
+        },
+        "amounts":{
           "currency":"USD",
           "shipping":shipping,
           "total":total
@@ -157,7 +165,7 @@ class AppComponent {
       }).then((val) {
         print(val.responseText);
         orderId = val.responseText;
-        //window.location.replace("$PATH_TO_PAYPAL_PHP?order_amount=$total?order_id=$orderId");
+        window.location.replace("$PATH_TO_PAYPAL_PHP?order_amount=$total?order_id=$orderId");
       }, onError: (e) => print("error"));
     } else {
 
