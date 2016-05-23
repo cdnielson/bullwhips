@@ -32,9 +32,7 @@ function getApiContext() {
         'AUfYsD88MkBeGv4kz78fHRyg_-OKW1WndNs1VioiWWpcKaWdrtjMal3rARDPiKiu676fOlB1lFvBef-I', //client
         'EBPhXA4_J9UCk5V2CBlqvJB9y8IFJmyO72Fda-tc_AVeSun0jvQ8wfkUVFkFl8x2W1v9xQCQXRDGbo-D' //secret
     ));
-
-
-
+    
 
     // Alternatively pass in the configuration via a hashmap.
     // The hashmap can contain any key that is allowed in

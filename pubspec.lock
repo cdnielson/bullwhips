@@ -97,6 +97,12 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  firebase:
+    description:
+      name: firebase
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.6+1"
   fixnum:
     description:
       name: fixnum
@@ -121,6 +127,12 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.2+2"
+  http:
+    description:
+      name: http
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.11.3+7"
   http_parser:
     description:
       name: http_parser

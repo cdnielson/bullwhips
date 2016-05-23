@@ -8,8 +8,8 @@ import 'dart:html';
 import 'dart:convert';
 import 'dart:async';
 //import 'dart:io';
-import 'package:bul'
-    'lwhips/pages/contact_page.dart';
+import 'package:bullwhips/pages/contact_page.dart';
+import 'package:firebase/firebase.dart' as FB;
 
 @Component(
     selector: 'my-app',
@@ -37,7 +37,9 @@ class AppComponent {
   bool menuOpened = false;
   String get paymentsPHP => "payments.php";
   static const String PATH_TO_PAYPAL_PHP = "php/order_place.php";
+  static const String PATH_TO_DB_PHP = "php/order_to_db.php";
   bool hideProcessing = true;
+  String orderId;
 
   AppComponent() {
     HttpRequest.getString(PATH_TO_PRODUCTS).then(parseProducts);
@@ -82,6 +84,8 @@ class AppComponent {
       cart.add(currentItem);
       calculatePrice();
       page = "CART";
+      // TODO verify this works
+      handleMenu(page, "top");
     }
   }
   bool checkIfItemIsInCart(Product item) {
@@ -129,38 +133,35 @@ class AppComponent {
     menuOpened = true;
   }
   payIt() {
-    /*var data =
-      {"amounts":{
-        "shipping":"15",
-        "currency":"USD"
-      },
-      "items_list":[
-          {
-            "name":"poppers (5)",
-            "quantity":"1",
-            "sku":"12345",
-            "price":"5",
-          },
-          {
-            "name":"whip",
-            "quantity":"1",
-            "sku":"12343",
-            "price":"700",
-          }
-        ]
-      };
+    if (total > 0) {
+      var data =
+        {"amounts":{
+          "currency":"USD",
+          "shipping":shipping,
+          "total":total
+        },
+        "items_list":[]};
+      for (Product p in cart) {
+        data["items_list"].add(
+            {"name":p.description,
+            "quantity":p.quantity,
+            "price":p.price}
+        );
+      }
 
-    var datasend = JSON.encode(data);
+      var datasend = JSON.encode(data);
 
-    hideProcessing = false;
-    HttpRequest.request(PATH_TO_PAYPAL_PHP, method: 'POST', mimeType: 'application/json', sendData: datasend).catchError((obj) {
-      //print(obj);
-    }).then((val) {
-      print(val.responseText);
-      hideProcessing = true;
-    }, onError: (e) => print("error"));*/
-    int orderAmount = 500;
+      hideProcessing = false;
+      HttpRequest.request(PATH_TO_DB_PHP, method: 'POST', mimeType: 'application/json', sendData: datasend).catchError((obj) {
+        //print(obj);
+      }).then((val) {
+        print(val.responseText);
+        orderId = val.responseText;
+        //window.location.replace("$PATH_TO_PAYPAL_PHP?order_amount=$total?order_id=$orderId");
+      }, onError: (e) => print("error"));
+    } else {
 
-    window.location.replace("$PATH_TO_PAYPAL_PHP?order_amount=$orderAmount");
+    }
   }
+
 }

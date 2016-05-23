@@ -13,7 +13,7 @@ $resultArray = array(json_decode($body));
 $orderAmount = $resultArray[0]->amounts;*/
 
 $orderAmount = $_GET['order_amount'];
-$orderDescription = "Folk Prophet Whips Order";
+$orderDescription = "Folk Prophet Whips Order - $" . $orderAmount;
 
 //$itemsListArray = $resultArray[0]->items_list;
 
