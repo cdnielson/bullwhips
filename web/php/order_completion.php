@@ -8,23 +8,10 @@
     <link rel="stylesheet" type="text/css" href="../iron-flex-layout.css">
 
 
-    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyA6vxB4OaImEXntU1maVDPyMGp_Yp90Gew",
-            authDomain: "project-5745322078275383797.firebaseapp.com",
-            databaseURL: "https://project-5745322078275383797.firebaseio.com",
-            storageBucket: "project-5745322078275383797.appspot.com",
-        };
-        firebase.initializeApp(config);
-    </script>
-
 </head>
 <div id="main" class="layout vertical center">
     <img src="../images/title.png" style="width: 100%; max-width: 1000px;" class="center-block"/>
     <div id="container" class="layout vertical center">
-        <h3>Thank you</h3>
 
                         <?php
                         /*
@@ -32,6 +19,46 @@
                          * the buyer gets redirected here post approval / cancellation of
                          * payment.
                          */
+                        $firstname = "";
+                        $lastname = "";
+                        $total = "";
+                        $shipping = "";
+
+                        $servername = "mysqlcluster15";
+                        $username = "cdnielson";
+                        $password = "Bryony1!";
+                        $dbname = "folkprophetwhips";
+
+                        // Create connection
+                        $conn = new mysqli($servername, $username, $password, $dbname);
+
+                        // Check connection
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                        }
+
+                        $sql = "SELECT * FROM order_master WHERE idx='".$_GET['orderId']."'";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            // output data of each row
+                            while($row = $result->fetch_assoc()) {
+                                $firstname = $row["firstname"];
+                                $lastname = $row["lastname"];
+                                $total = $row["total"];
+                                $shipping = $row["shipping"];
+                            }
+                        } else {
+                            echo "0 results";
+                        }
+
+                        $sql = "SELECT * FROM order_items WHERE order_idx='".$_GET['orderId']."'";
+                        $result = $conn->query($sql);
+                        $itemsArray = array();
+                        while($row = mysqli_fetch_assoc($result)) {
+                            $itemsArray[] = $row;
+                        };
+                        //var_dump($itemsArray);
                         require_once __DIR__ . '/bootstrap.php';
 
                         if(isset($_GET['success'])) {
@@ -49,7 +76,19 @@
                                     $payment = executePayment($_GET['paymentId'], $_GET['PayerID']);
                                     //updateOrder($orderId, $payment->getState());
                                     $messageType = "success";
-                                    echo "Your payment was successful. Your order id is $orderId.";
+                                    echo "<h3>Thank you</h3>";
+                                    echo "Your payment was successful.<br>Your order id is $orderId<br>";
+                                    echo "Order Details:<br>";
+                                    echo "Name: " . $firstname . " " . $lastname . "<br><br>";
+                                    foreach ($itemsArray as $item) {
+                                        echo "Item:<br>";
+                                        echo "Description: " . $item['description'] . "<br>";
+                                        echo "Price $" . $item['price'] . "<br>";
+                                        echo "Quantity: " . $item['quantity'] . "<br>";
+                                        echo "<br>";
+                                    }
+                                    echo "Shipping: " . $shipping . "<br>";
+                                    echo "Order Total: " . $total;
                                 } catch (\PayPal\Exception\PPConnectionException $ex) {
                                     echo parseApiError($ex->getData());
                                     echo "error";
@@ -59,11 +98,11 @@
                                 }
 
                             } else {
-                                echo "error";
                                 echo "Your payment was cancelled.";
                             }
                         }
                         ?>
+        <a href="../">Return to shopping.</a>
     </div>
 </div>
 

@@ -22,7 +22,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully";
+//echo "Connected successfully";
 
 $sql = "INSERT INTO order_master (lastname, firstname, currency, shipping, total)
 VALUES ('".$lastname."', '".$firstname."', '".$currency."', '".$shipping."', '".$total."')";
@@ -40,18 +40,20 @@ foreach ($items[0] as $item) {
     $quantity = $item->quantity;
     $price = $item->price;
 
-    echo $description;
+    //echo $description;
 
 
     $sql = "INSERT INTO order_items (order_idx, description, price, quantity)
 VALUES ('".$idx."', '".$description."', '".$price."', '".$quantity."')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "order added successfully";
+        //echo "order added successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
+
+echo $idx;
 
 $conn->close();
 

@@ -13,7 +13,6 @@ $resultArray = array(json_decode($body));
 $orderAmount = $resultArray[0]->amounts;*/
 
 $orderAmount = $_GET['order_amount'];
-$orderId = $_GET['order_id'];
 $orderDescription = "Folk Prophet Whips Order - $" . $orderAmount;
 
 //$itemsListArray = $resultArray[0]->items_list;
@@ -32,7 +31,8 @@ $orderDescription = "Folk Prophet Whips Order - $" . $orderAmount;
             $messageType = "success";
 
         } else if($order['payment_method'] == 'paypal') {*/
-        
+
+            $orderId = $_GET['order_id'];
             // Create the payment and redirect buyer to paypal for payment approval.
             $baseUrl = getBaseUrl() . "/order_completion.php?orderId=$orderId";
             $payment = makePaymentUsingPayPal($orderAmount, 'USD', $orderDescription,

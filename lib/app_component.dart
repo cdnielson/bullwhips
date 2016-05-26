@@ -17,7 +17,7 @@ import 'package:firebase/firebase.dart' as FB;
     directives: const [ContactPage])
 class AppComponent {
   static const String PATH_TO_PRODUCTS = "data/products.json";
-  String page = "HOME";
+  String page = "WHIPS";
   String tenOrMore = "one";
   String get pathToLogo => "images/title.png";
   String get pathToImages => "images/";
@@ -46,12 +46,12 @@ class AppComponent {
 
   AppComponent() {
     HttpRequest.getString(PATH_TO_PRODUCTS).then(parseProducts);
-    topMenu.add(new Menu("HOME", "black"));
-    topMenu.add(new Menu("ABOUT", "gray"));
-    topMenu.add(new Menu("CONTACT", "gray"));
-    topMenu.add(new Menu("CART", "gray"));
-    sideMenu.add(new Menu("WHIPS", "gray"));
-    sideMenu.add(new Menu("ACCESSORIES", "gray"));
+    topMenu.add(new Menu("HOME", "white"));
+    topMenu.add(new Menu("ABOUT", "white"));
+    topMenu.add(new Menu("CONTACT", "white"));
+    topMenu.add(new Menu("CART", "white"));
+    sideMenu.add(new Menu("WHIPS", "pink"));
+    sideMenu.add(new Menu("ACCESSORIES", "white"));
     content = querySelector('#content');
   }
   parseProducts(data) {
@@ -63,16 +63,16 @@ class AppComponent {
   handleMenu(page, menu) {
     this.page = page;
     for (Menu t in topMenu) {
-      t.style = "gray";
+      t.style = "white";
     }
     for (Menu t in sideMenu) {
-      t.style = "gray";
+      t.style = "white";
     }
     if (menu == 'top') {
-      topMenu.where((Menu element) => element.title == page).first.style = "black";
+      topMenu.where((Menu element) => element.title == page).first.style = "pink";
     }
     if (menu == 'side') {
-      sideMenu.where((Menu element) => element.title == page).first.style = "black";
+      sideMenu.where((Menu element) => element.title == page).first.style = "pink";
     }
     //scroll();
     menuOpened = false;
@@ -136,6 +136,9 @@ class AppComponent {
     menuOpened = true;
   }
   payIt() {
+    if(firstName.isEmpty || lastName.isEmpty || email.isEmpty) {
+      return;
+    }
     if (total > 0) {
       var data =
         {"customer":{
@@ -165,7 +168,7 @@ class AppComponent {
       }).then((val) {
         print(val.responseText);
         orderId = val.responseText;
-        window.location.replace("$PATH_TO_PAYPAL_PHP?order_amount=$total?order_id=$orderId");
+        window.location.replace("$PATH_TO_PAYPAL_PHP?order_amount=$total&order_id=$orderId");
       }, onError: (e) => print("error"));
     } else {
 
