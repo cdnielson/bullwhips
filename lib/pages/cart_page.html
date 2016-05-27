@@ -1,6 +1,6 @@
 <h3>Cart</h3>
 
-<div *ngFor="let item of cart; let i = index">
+<div *ngFor="let item of cart.items; let i = index">
     <div class="row">
         <div  class="col-md-2">{{item.description}}</div>
         <div  class="col-md-2">${{item.price}}</div>
@@ -22,9 +22,9 @@
     </div>
     <hr>
 </div>
-<div>Subtotal: ${{subtotal}}</div>
-<div>Shipping: ${{shipping}}</div>
-<div>Total: ${{total}}</div>
+<div>Subtotal: ${{cart.subtotal}}</div>
+<div>Shipping: ${{cart.shipping}}</div>
+<div>Total: ${{cart.total}}</div>
 <span>Payment options coming soon. If you want to order a whip, please use the contact form or email us.</span>
 <form class="form">
     <div class="form-group">
@@ -54,6 +54,8 @@
 <div class="layout horizontal center-justified wrap">
     <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right:7px;" (click)="payIt()"/>
     <button class="btn btn-default" style="border-radius: 20px;" (click)="continueShopping()">Continue Shopping</button>
+    <button (click)="printCart()">Print it</button>
+
 </div>
 <br>
 <br>
@@ -61,3 +63,4 @@
 <br>
 <br>
 <p>To order more than 10 of any item, please email <a href="mailto:cdnielson@folkprophet.com">cdnielson@folkprophet.com</a> or contact us through our <a href="#" (click)="handleMenu('CONTACT', 'top')">contact page</a>.</p>
+<div id="processing" [hidden]="hideProcessing" class="layout vertical center popup">Processing...</div>

@@ -142,13 +142,13 @@
                             <contact-page></contact-page>
                         </div>
                         <div *ngSwitchWhen="'WHIPS'" id="whips">
-                            <whips-page></whips-page>
+                            <whips-page (zoomIt)="zoom($event)" (page)="handleMenu($event, 'top')"></whips-page>
                         </div>
                         <div *ngSwitchWhen="'ACCESSORIES'" id="accessories">
-                            <accessories-page></accessories-page>
+                            <accessories-page (zoomIt)="zoom($event)"></accessories-page>
                         </div>
                         <div *ngSwitchWhen="'CART'" id="cart">
-                            <cart-page></cart-page>
+                            <cart-page (page)="handleMenu($event, 'side')"></cart-page>
                         </div>
                         <div *ngSwitchWhen="'CUSTOM'">
                             <h3>Custom Whip</h3>
@@ -161,4 +161,4 @@
     </div>
 </div>
 <div id="zoomed" [hidden]="hideZoom" class="layout vertical center popup"><img style="width: 90%; max-height: 1000px;" [src]="zoomImage" (click)="closeZoom()"/>click/tap to close</div>
-<div id="processing" [hidden]="hideProcessing" class="layout vertical center popup">Processing...</div>
+

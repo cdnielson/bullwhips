@@ -8,7 +8,7 @@ import 'dart:html';
 import 'dart:convert';
 import 'dart:async';
 //import 'dart:io';
-import 'package:firebase/firebase.dart' as FB;
+//import 'package:firebase/firebase.dart' as FB;
 import 'package:bullwhips/pages/contact_page.dart';
 import 'package:bullwhips/pages/home_page.dart';
 import 'package:bullwhips/pages/about_page.dart';
@@ -16,29 +16,27 @@ import 'package:bullwhips/pages/whips_page.dart';
 import 'package:bullwhips/pages/accessories_page.dart';
 import 'package:bullwhips/pages/cart_page.dart';
 import 'package:bullwhips/services/products_service.dart';
+import 'package:bullwhips/services/cart.dart';
 
 @Component(
     selector: 'my-app',
     templateUrl: 'app_component.html',
     directives: const [ContactPage, HomePage, AboutPage, WhipsPage, AccessoriesPage, CartPage],
-    providers: const [ProductsService])
+    providers: const [ProductsService, Cart])
 class AppComponent {
 
   String page = "WHIPS";
   String tenOrMore = "one";
   String get pathToLogo => "images/title.png";
-
-
   List<Menu> topMenu = [];
   List<Menu> sideMenu = [];
-  String zoomImage = "";
-  bool hideZoom = true;
   DivElement content;
   bool menuOpened = false;
+  String zoomImage = "";
+  bool hideZoom = true;
+  ProductsService productsService;
 
-
-  AppComponent() {
-
+  AppComponent(ProductsService this.productsService) {
     topMenu.add(new Menu("HOME", "white"));
     topMenu.add(new Menu("ABOUT", "white"));
     topMenu.add(new Menu("CONTACT", "white"));
@@ -70,18 +68,20 @@ class AppComponent {
     window.scrollTo(0, location);
   }
 
-  zoom(image) {
-    zoomImage = "$pathToImages$image";
-    hideZoom = false;
-  }
-  closeZoom() {
-    hideZoom = true;
-  }
+
   continueShopping() {
     page = "WHIPS";
   }
   openMenu() {
     menuOpened = true;
+  }
+
+  zoom(image) {
+    zoomImage = "$productsService.pathToImages$image";
+    hideZoom = false;
+  }
+  closeZoom() {
+    hideZoom = true;
   }
 
 
