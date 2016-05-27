@@ -149,8 +149,10 @@
                             <div class="layout horizontal around-justified wrap">
                                 <div *ngFor="let whip of whips" class="layout vertical center">
                                     <img class="thumbnail" [src]="pathToThumbnails + whip.image" (click)="zoom(whip.image)"/>
-                                    <span>{{whip.description}}</span>
-                                    <span>${{whip.price}}</span>
+                                    <div>{{whip.length}}</div>
+                                    <div>{{whip.description}}</div>
+                                    <div>{{whip.material}}</div>
+                                    <div>${{whip.price}}</div>
                                     <button  class="btn btn-default" (click)="addToCart(whip.description)">Add to Cart</button>
                                 </div>
                             </div>

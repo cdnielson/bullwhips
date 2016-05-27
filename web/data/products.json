@@ -1,6 +1,6 @@
 [
-  {"category":"whip", "description":"8 Foot 12 Plait Natural Kangaroo Leather", "image":"8foot.jpg", "price":500},
-  {"category":"whip", "description":"10 Foot 12 Plait Natural Kangaroo Leather", "image":"10foot.jpg", "price":700},
+  {"category":"whip", "description":"12 Plait Bullwhip", "material":"Natural Kangaroo Leather", "length":"8 Foot", "image":"8foot.jpg", "price":500},
+  {"category":"whip", "description":"12 Plait Bullwhip", "material":"Natural Kangaroo Leather", "length":"10 Foot",  "image":"10foot.jpg", "price":700},
   {"category":"accessory", "description":"Popper/Cracker (5 pack)", "image":"poppers.jpg", "price":5},
   {"category":"accessory", "description":"Whitehide Fall", "image":"whitehide_fall.jpg", "price":15},
   {"category":"accessory", "description":"Redhide Fall", "image":"redhide_fall.jpg", "price":15}
