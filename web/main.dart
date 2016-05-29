@@ -4,7 +4,8 @@
 import 'package:angular2/platform/browser.dart';
 
 import 'package:bullwhips/app_component.dart';
+import 'package:angular2/router.dart';
 
 main() {
-  bootstrap(AppComponent);
+  bootstrap(AppComponent, [ROUTER_PROVIDERS]);
 }

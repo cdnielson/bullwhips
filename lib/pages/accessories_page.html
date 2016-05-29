@@ -1,9 +1,11 @@
-<h3>Accessories</h3>
-<div class="layout horizontal around-justified wrap">
-    <div *ngFor="let accessory of productsService.accessories" class="layout vertical center">
-        <img class="thumbnail" [src]="productsService.pathToThumbnails + accessory.image" (click)="zoom(accessory.image)"/>
-        <span>{{accessory.description}}</span>
-        <span>${{accessory.price}}</span>
-        <button  class="btn btn-default" (click)="addToCart(accessory.description)">Add to Cart</button>
+<div class="content layout vertical start">
+    <h3>Accessories</h3>
+    <div class="layout horizontal around-justified wrap">
+        <div *ngFor="let accessory of productsService.accessories" class="layout vertical center">
+            <img class="thumbnail" [src]="productsService.pathToThumbnails + accessory.image" (click)="zoom(accessory.image)"/>
+            <span>{{accessory.description}}</span>
+            <span>${{accessory.price}}</span>
+            <button  class="btn btn-default" (click)="addToCart(accessory.description)">Add to Cart</button>
+        </div>
     </div>
 </div>

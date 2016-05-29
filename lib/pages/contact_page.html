@@ -1,81 +1,83 @@
-<div>
-    <div [ngSwitch]="page">
+<div class="content layout vertical start">
+    <div>
+        <div [ngSwitch]="page">
 
-        <div *ngSwitchWhen="'contact'">
-            <h3>Contact Folk Prophet Whips</h3>
-            <br>
-            <div>
-                <h4>Questions? Concerns? Just want to chat?</h4>
-                <h4>Call us at: 801-885-6258</h4>
-                <h4>or fill out the form below:</h4>
-            </div>
-
-            <form class="form" [action]="pathToContact" method="post">
-                <div class="form-group">
-
-
-                    <div id="name" class="container-fluid">
-
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <span><strong>Date:</strong> {{date}}</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="firstname">First Name</label>
-                                <input type="text" id="firstname" name="firstname" class="form-control" placeholder="First Name" required [(ngModel)]="firstName">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="lastname">Last Name</label>
-                                <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Last Name" required [(ngModel)]="lastName">
-                            </div>
-                        </div>
-
-                        <div class="row">
-
-                            <div class="form-group col-md-6">
-                                <label for="email">Email Address</label>
-                                <input type="email" class="form-control" id="email" name="email" required [(ngModel)]="email">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="phone">Phone</label>
-                                <input type="tel" class="form-control" id="phone" name="phone" required [(ngModel)]="phone">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                How can we help you?*
-                                <textarea class="form-control" rows="4" name="message" required [(ngModel)]="message"></textarea>
-                            </div>
-                        </div>
-                        <br>
-                        <button class="btn btn-default" (click)="sendMessage()">Send Message</button>
-                    </div>
-                </div>
-            </form>
-            <hr>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Location</h3>
-
-                        <p>Folk Prophet Whips
-                            <br>3536 South Hawk Drive
-                            <br>Saratoga Springs, Utah 84045
-                            <br>Phone: 801-885-6258</p>
-                        <!--<a href="mailto:folkprophet@folkprophet.com">folkprophet@folkprophet.com</a>-->
-                        <!--<br>-->
-                        <a href="mailto:cdnielson@folkprophet.com">cdnielson@folkprophet.com</a>
-                    </div>
+            <div *ngSwitchWhen="'contact'">
+                <h3>Contact Folk Prophet Whips</h3>
+                <br>
+                <div>
+                    <h4>Questions? Concerns? Just want to chat?</h4>
+                    <h4>Call us at: 801-885-6258</h4>
+                    <h4>or fill out the form below:</h4>
                 </div>
 
+                <form class="form" [action]="pathToContact" method="post">
+                    <div class="form-group">
+
+
+                        <div id="name" class="container-fluid">
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <span><strong>Date:</strong> {{date}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="firstname">First Name</label>
+                                    <input type="text" id="firstname" name="firstname" class="form-control" placeholder="First Name" required [(ngModel)]="firstName">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="lastname">Last Name</label>
+                                    <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Last Name" required [(ngModel)]="lastName">
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="form-group col-md-6">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" class="form-control" id="email" name="email" required [(ngModel)]="email">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="phone">Phone</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required [(ngModel)]="phone">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    How can we help you?*
+                                    <textarea class="form-control" rows="4" name="message" required [(ngModel)]="message"></textarea>
+                                </div>
+                            </div>
+                            <br>
+                            <button class="btn btn-default" (click)="sendMessage()">Send Message</button>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Location</h3>
+
+                            <p>Folk Prophet Whips
+                                <br>3536 South Hawk Drive
+                                <br>Saratoga Springs, Utah 84045
+                                <br>Phone: 801-885-6258</p>
+                            <!--<a href="mailto:folkprophet@folkprophet.com">folkprophet@folkprophet.com</a>-->
+                            <!--<br>-->
+                            <a href="mailto:cdnielson@folkprophet.com">cdnielson@folkprophet.com</a>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </div>
-        <div *ngSwitchWhen="'messageSent'">
-            Your message has been sent. We will get back to you shortly. Thank you!
+            <div *ngSwitchWhen="'messageSent'">
+                Your message has been sent. We will get back to you shortly. Thank you!
+            </div>
         </div>
     </div>
+    <br>
+    <br>
 </div>
-<br>
-<br>

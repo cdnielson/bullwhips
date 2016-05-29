@@ -10,7 +10,94 @@ body {
     background: -moz-linear-gradient(right,  #3B2200, #A8742A, #85530F, #A8742A, #85530F,  #3B2200);
     background: linear-gradient(to right,  #3B2200, #A8742A, #85530F, #A8742A, #85530F,  #3B2200);
 }
+#left-nav-large {
+    display: flex;
+    width: 10vw;
+}
+#left-nav-small{
+    display: none;
+}
+#top-menu-large {
+    display: flex;
+    width: 80vw;
+}
+#top-menu-small {
+    display: none;
+}
+#menus-small {
+    display: none;
+}
+.content {
+    width: 66vw;
+    padding-left: 2vw;
+    margin-left: 4vw;
+    display: flex;
+    padding-bottom: 20px;
+    background: white;
+    border: 2px solid black;
+}
+@media screen and (max-width: 925px) {
+    #left-nav-large {
+        display: none;
+    }
+    #left-nav-small {
+        width: 100vw;
+        display: flex;
+    }
+    #top-menu-large {
+        display: none;
+    }
+    #top-menu-small {
+        display: flex;
+        width: 100vw;
+    }
+    #content {
+        width: 98vw;
+        padding: 10vw;
+    }
+    #menus-small {
+        display: inline;
+    }
+}
 
+
+.menu-item {
+    padding-left: 20px;
+}
+.pointer {
+    cursor: pointer;
+}
+.thumbnail {
+    width: 200px;
+}
+#zoomed {
+    padding: 20px;
+    border: 1px solid black;
+    background: white;
+    height: 100vh;
+}
+.popup {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+}
+.selected {
+    color: black;
+}
+.notselected {
+    color: gray;
+}
+.hamburger {
+    background-color: black;
+    width: 50px;
+    height: 5px;
+    margin-bottom: 5px;
+}
+#window {
+    width: 80vw;
+}
 /*******************************
           Flex Layout
 *******************************/

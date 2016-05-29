@@ -3,7 +3,7 @@ import 'package:bullwhips/services/products_service.dart';
 import 'package:bullwhips/services/cart.dart';
 import 'package:bullwhips/model/product.dart';
 
-@Component(selector: 'accessories-page', templateUrl: 'accessories_page.html', providers: const [ProductsService, Cart])
+@Component(selector: 'accessories-page', templateUrl: 'accessories_page.html', providers: const [ProductsService])
 class AccessoriesPage {
   ProductsService productsService;
   @Output() EventEmitter zoomIt = new EventEmitter();
@@ -18,7 +18,9 @@ class AccessoriesPage {
   addToCart(item) {
     Product currentItem = productsService.productList.where((Product element) => element.description == item).first;
     cart.addToCart(currentItem);
-    cart.calculatePrice();
+    /*for (var i in cart.items) {
+      print(i.description);
+    }*/
     page.emit("CART");
   }
 }

@@ -17,14 +17,21 @@ import 'package:bullwhips/pages/accessories_page.dart';
 import 'package:bullwhips/pages/cart_page.dart';
 import 'package:bullwhips/services/products_service.dart';
 import 'package:bullwhips/services/cart.dart';
+import 'package:angular2/router.dart';
 
-@Component(
-    selector: 'my-app',
-    templateUrl: 'app_component.html',
-    directives: const [ContactPage, HomePage, AboutPage, WhipsPage, AccessoriesPage, CartPage],
-    providers: const [ProductsService, Cart])
+@Component(selector: 'my-app', providers: const [ProductsService, Cart])
+@View(templateUrl: 'app_component.html',
+    directives: const [ROUTER_DIRECTIVES] //, ContactPage, HomePage, AboutPage, WhipsPage, AccessoriesPage, CartPage
+    )
+@RouteConfig(const [
+  const Route(path: '/', name: 'HOME', component: HomePage),
+  const Route(path: '/about-page', name: 'ABOUT', component: AboutPage),
+  const Route(path: '/contact-page', name: 'CONTACT', component: ContactPage),
+  const Route(path: '/whips-page', name: 'WHIPS', component: WhipsPage),
+  const Route(path: '/accessories-page', name: 'ACCESSORIES', component: AccessoriesPage),
+  const Route(path: '/cart-page', name: 'CART', component: CartPage)
+])
 class AppComponent {
-
   String page = "WHIPS";
   String tenOrMore = "one";
   String get pathToLogo => "images/title.png";
@@ -35,8 +42,9 @@ class AppComponent {
   String zoomImage = "";
   bool hideZoom = true;
   ProductsService productsService;
+  Router _router;
 
-  AppComponent(ProductsService this.productsService) {
+  AppComponent(ProductsService this.productsService, Router this._router) {
     topMenu.add(new Menu("HOME", "white"));
     topMenu.add(new Menu("ABOUT", "white"));
     topMenu.add(new Menu("CONTACT", "white"));
@@ -44,6 +52,10 @@ class AppComponent {
     sideMenu.add(new Menu("WHIPS", "pink"));
     sideMenu.add(new Menu("ACCESSORIES", "white"));
     content = querySelector('#content');
+  }
+
+  routeIt() {
+    _router.navigate(['CART', {'id': 'cart-page'}]);
   }
 
   handleMenu(page, menu) {

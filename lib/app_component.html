@@ -1,98 +1,8 @@
-<style>
-    #left-nav-large {
-        display: flex;
-        width: 10vw;
-    }
-    #left-nav-small{
-        display: none;
-    }
-    #top-menu-large {
-        display: flex;
-        width: 80vw;
-    }
-    #top-menu-small {
-        display: none;
-    }
-    #menus-small {
-        display: none;
-    }
-    #content {
-        width: 66vw;
-        padding-left: 2vw;
-        margin-left: 4vw;
-        display: flex;
-        padding-bottom: 20px;
-        background: white;
-        border: 2px solid black;
-    }
-    @media screen and (max-width: 925px) {
-        #left-nav-large {
-            display: none;
-        }
-        #left-nav-small {
-            width: 100vw;
-            display: flex;
-        }
-        #top-menu-large {
-            display: none;
-        }
-        #top-menu-small {
-            display: flex;
-            width: 100vw;
-        }
-        #content {
-            width: 98vw;
-            padding: 10vw;
-        }
-        #menus-small {
-            display: inline;
-        }
-    }
-
-
-    .menu-item {
-        padding-left: 20px;
-    }
-    .pointer {
-        cursor: pointer;
-    }
-    .thumbnail {
-        width: 200px;
-    }
-    #zoomed {
-        padding: 20px;
-        border: 1px solid black;
-        background: white;
-        height: 100vh;
-    }
-    .popup {
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 10000;
-    }
-    .selected {
-        color: black;
-    }
-    .notselected {
-        color: gray;
-    }
-    .hamburger {
-        background-color: black;
-        width: 50px;
-        height: 5px;
-        margin-bottom: 5px;
-    }
-    #window {
-        width: 80vw;
-    }
-</style>
-
+<!--
 <div id="main" class="layout vertical center">
     <img [src]="pathToLogo" style="width: 100%; max-width: 1000px; padding-top:10px;" class="center-block"/>
     <div id="container" class="layout vertical center">
-        <!--small screen menus-->
+        &lt;!&ndash;small screen menus&ndash;&gt;
         <div id="menus-small">
             <div [hidden]="menuOpened">
                 <div (click)="openMenu()" style="padding-bottom: 10px;">
@@ -103,19 +13,21 @@
             </div>
             <div [hidden]="!menuOpened">
                 <div id="left-nav-small" class="layout vertical center">
-                    <div *ngFor="let item of sideMenu">
-                        <h3 (click)="handleMenu(item.title, 'side')" [ngStyle]="{'color': item.style}" class="pointer">{{item.title}}</h3>
-                    </div>
+                    &lt;!&ndash;<div *ngFor="let item of sideMenu">
+                        <h3 (click)="handleMenu(item.title, 'side')" [ngStyle]="{'color': item.style}" class="pointer"><a [routerLink]="[item.title]">{{item.title}}</a></h3>
+                    </div>&ndash;&gt;
                 </div>
                 <div id="top-menu-small" class="layout vertical center">
-                    <div *ngFor="let item of topMenu">
-                        <h3 class="pointer" [ngStyle]="{'color': item.style}" (click)="handleMenu(item.title, 'top')">{{item.title}}</h3>
-                    </div>
+                    <a [routerLink="['HOME']">HOME</a>
+                    <a [routerLink="['ABOUT']">ABOUT</a>
+                    &lt;!&ndash;<div *ngFor="let item of topMenu">
+                        <h3 class="pointer" [ngStyle]="{'color': item.style}" (click)="handleMenu(item.title, 'top')"><a [routerLink]="[item.title]">{{item.title}}</a></h3>
+                    </div>&ndash;&gt;
                 </div>
             </div>
         </div>
 
-        <!--large screen menus-->
+        &lt;!&ndash;large screen menus&ndash;&gt;
 
         <div id="top-menu-large" class="layout horizontal end-justified">
             <div *ngFor="let item of topMenu">
@@ -131,7 +43,10 @@
                 </div>
 
                 <div id="content">
-                    <div [ngSwitch]="page">
+                    <router-outlet></router-outlet>
+
+
+                    &lt;!&ndash;<div [ngSwitch]="page">
                         <div *ngSwitchWhen="'HOME'" id="home">
                             <home-page></home-page>
                         </div>
@@ -145,14 +60,14 @@
                             <whips-page (zoomIt)="zoom($event)" (page)="handleMenu($event, 'top')"></whips-page>
                         </div>
                         <div *ngSwitchWhen="'ACCESSORIES'" id="accessories">
-                            <accessories-page (zoomIt)="zoom($event)"></accessories-page>
+                            <accessories-page (zoomIt)="zoom($event)" (page)="handleMenu($event, 'top')"></accessories-page>
                         </div>
                         <div *ngSwitchWhen="'CART'" id="cart">
                             <cart-page (page)="handleMenu($event, 'side')"></cart-page>
                         </div>
                         <div *ngSwitchWhen="'CUSTOM'">
                             <h3>Custom Whip</h3>
-                        </div>
+                        </div>&ndash;&gt;
                     </div>
                 </div>
 
@@ -162,3 +77,17 @@
 </div>
 <div id="zoomed" [hidden]="hideZoom" class="layout vertical center popup"><img style="width: 90%; max-height: 1000px;" [src]="zoomImage" (click)="closeZoom()"/>click/tap to close</div>
 
+-->
+<div id="main" class="layout vertical center">
+    <img [src]="pathToLogo" style="width: 100%; max-width: 1000px; padding-top:10px;" class="center-block"/>
+    <div class="layout horizontal end-justified" id="top-menu-large">
+        <div *ngFor="let item of topMenu"><h4><a [routerLink]="[item.title]" [ngStyle]="{'color': item.style}" style="padding-left: 10px;" (click)="handleMenu(item.title, 'top')">{{item.title}}</a></h4></div>
+    </div>
+    <div class="layout horizontal center-justified">
+        <div class="layout vertical start" id="left-nav-large">
+            <div *ngFor="let item of sideMenu"><h4><a [routerLink]="[item.title]" [ngStyle]="{'color': item.style}" (click)="handleMenu(item.title, 'side')">{{item.title}}</a></h4></div>
+        </div>
+
+        <router-outlet></router-outlet>
+    </div>
+</div>
