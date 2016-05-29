@@ -47,12 +47,12 @@ class AppComponent {
 
   AppComponent(ProductsService this.productsService, MenuService this.menu) {
 
-    menu.addToMenu("HOME", "white", "top");
-    menu.addToMenu("ABOUT", "white", "top");
-    menu.addToMenu("CONTACT", "white", "top");
-    menu.addToMenu("CART", "white", "top");
-    menu.addToMenu("WHIPS", "pink", "side");
-    menu.addToMenu("ACCESSORIES", "white", "side");
+    menu.addToMenu("HOME", "pink", "top", "");
+    menu.addToMenu("ABOUT", "white", "top", "");
+    menu.addToMenu("CONTACT", "white", "top", "");
+    menu.addToMenu("CART", "white", "top", "glyphicon glyphicon-shopping-cart");
+    menu.addToMenu("WHIPS", "white", "side", "");
+    menu.addToMenu("ACCESSORIES", "white", "side", "");
 
     topMenu = menu.items.where((Menu element) => element.location == "top").toList();
     sideMenu = menu.items.where((Menu element) => element.location == "side").toList();
@@ -91,6 +91,4 @@ class AppComponent {
   closeZoom() {
     hideZoom = true;
   }
-
-
 }

@@ -18,6 +18,7 @@ class WhipsPage {
   WhipsPage(ProductsService this.productsService, Cart this.cart, Router this._router, MenuService this.menu);
 
   zoom(image) {
+    // TODO get zoom working (probably local to this and accessories components)
     zoomIt.emit(image);
   }
 

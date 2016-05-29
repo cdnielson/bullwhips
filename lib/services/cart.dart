@@ -7,6 +7,7 @@ class Cart {
   int _subtotal = 0;
   int _shipping = 0;
   int _total = 0;
+  int _cartAmount = 0;
 
   List<Product> get items {
     return _items;
@@ -20,14 +21,15 @@ class Cart {
   int get total {
     return _total;
   }
+  int get cartAmount {
+    return _cartAmount;
+  }
 
   addToCart(Product product) {
     /*if(!checkIfItemIsInCart(product)) {
       print(product.length);*/
       _items.add(product);
-      for(var c in _items) {
-        print(c.length);
-      }
+      _cartAmount = _items.length;
       calculatePrice();
 //    }
   }

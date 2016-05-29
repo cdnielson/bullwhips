@@ -9,7 +9,7 @@ class MenuService {
     return _items;
   }
 
-  addToMenu(String title, String style, String location) {
-    _items.add(new Menu(title, style, location));
+  addToMenu(String title, String style, String location, String icon) {
+    _items.add(new Menu(title, style, location, icon));
   }
 }

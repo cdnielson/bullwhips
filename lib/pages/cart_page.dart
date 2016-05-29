@@ -30,12 +30,7 @@ class CartPage {
 
   @Output() EventEmitter page = new EventEmitter<String>();
 
-  CartPage(ProductsService this.productsService, Cart this.cart, Router this._router);
-
-  /*ngDoCheck() {
-    cartItems = cart.items;
-    print(cartItems);
-  }*/
+  CartPage(ProductsService this.productsService, Cart this.cart, Router this._router, MenuService this.menu);
 
   handleQuantityDropdown(description, value) {
     Product currentItem = cart.items.where((Product element) => element.description == description).first;

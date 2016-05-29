@@ -1,93 +1,33 @@
-<!--
-<div id="main" class="layout vertical center">
-    <img [src]="pathToLogo" style="width: 100%; max-width: 1000px; padding-top:10px;" class="center-block"/>
-    <div id="container" class="layout vertical center">
-        &lt;!&ndash;small screen menus&ndash;&gt;
-        <div id="menus-small">
-            <div [hidden]="menuOpened">
-                <div (click)="openMenu()" style="padding-bottom: 10px;">
-                    <div class="hamburger"></div>
-                    <div class="hamburger"></div>
-                    <div class="hamburger"></div>
-                </div>
-            </div>
-            <div [hidden]="!menuOpened">
-                <div id="left-nav-small" class="layout vertical center">
-                    &lt;!&ndash;<div *ngFor="let item of sideMenu">
-                        <h3 (click)="handleMenu(item.title, 'side')" [ngStyle]="{'color': item.style}" class="pointer"><a [routerLink]="[item.title]">{{item.title}}</a></h3>
-                    </div>&ndash;&gt;
-                </div>
-                <div id="top-menu-small" class="layout vertical center">
-                    <a [routerLink="['HOME']">HOME</a>
-                    <a [routerLink="['ABOUT']">ABOUT</a>
-                    &lt;!&ndash;<div *ngFor="let item of topMenu">
-                        <h3 class="pointer" [ngStyle]="{'color': item.style}" (click)="handleMenu(item.title, 'top')"><a [routerLink]="[item.title]">{{item.title}}</a></h3>
-                    </div>&ndash;&gt;
-                </div>
-            </div>
-        </div>
-
-        &lt;!&ndash;large screen menus&ndash;&gt;
-
-        <div id="top-menu-large" class="layout horizontal end-justified">
-            <div *ngFor="let item of topMenu">
-                <h4 (click)="handleMenu(item.title, 'top')" [ngStyle]="{'color': item.style}" class="menu-item pointer">{{item.title}}</h4>
-            </div>
-        </div>
-        <div id="window">
-            <div class="layout horizontal">
-                <div id="left-nav-large" class="layout vertical start-justified">
-                    <div *ngFor="let item of sideMenu">
-                        <h4 (click)="handleMenu(item.title, 'side')" [ngStyle]="{'color': item.style}" class="pointer">{{item.title}}</h4>
-                    </div>
-                </div>
-
-                <div id="content">
-                    <router-outlet></router-outlet>
-
-
-                    &lt;!&ndash;<div [ngSwitch]="page">
-                        <div *ngSwitchWhen="'HOME'" id="home">
-                            <home-page></home-page>
-                        </div>
-                        <div *ngSwitchWhen="'ABOUT'" id="about">
-                            <about-page></about-page>
-                        </div>
-                        <div *ngSwitchWhen="'CONTACT'" id="contact">
-                            <contact-page></contact-page>
-                        </div>
-                        <div *ngSwitchWhen="'WHIPS'" id="whips">
-                            <whips-page (zoomIt)="zoom($event)" (page)="handleMenu($event, 'top')"></whips-page>
-                        </div>
-                        <div *ngSwitchWhen="'ACCESSORIES'" id="accessories">
-                            <accessories-page (zoomIt)="zoom($event)" (page)="handleMenu($event, 'top')"></accessories-page>
-                        </div>
-                        <div *ngSwitchWhen="'CART'" id="cart">
-                            <cart-page (page)="handleMenu($event, 'side')"></cart-page>
-                        </div>
-                        <div *ngSwitchWhen="'CUSTOM'">
-                            <h3>Custom Whip</h3>
-                        </div>&ndash;&gt;
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<div id="zoomed" [hidden]="hideZoom" class="layout vertical center popup"><img style="width: 90%; max-height: 1000px;" [src]="zoomImage" (click)="closeZoom()"/>click/tap to close</div>
-
--->
 <div id="main" class="layout vertical center">
     <img [src]="pathToLogo" style="width: 100%; max-width: 1000px; padding-top:10px;" class="center-block"/>
     <div class="layout horizontal end-justified" id="top-menu-large">
-        <div *ngFor="let item of topMenu"><h4><a [routerLink]="[item.title]" [ngStyle]="{'color': item.style}" style="padding-left: 10px;" (click)="handleMenu(item.title, 'top')">{{item.title}}</a></h4></div>
+        <div *ngFor="let item of topMenu"><h4><a [routerLink]="[item.title]" [ngStyle]="{'color': item.style}" style="padding-left: 10px;" (click)="handleMenu(item.title, 'top')"><span [ngClass]="item.icon"></span>{{item.title}}</a></h4></div>
     </div>
+
+    <div id="menus-small">
+        <div [hidden]="menuOpened">
+            <div (click)="openMenu()" style="padding-bottom: 10px;">
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+            </div>
+        </div>
+        <div [hidden]="!menuOpened">
+            <div id="left-nav-small" class="layout vertical center">
+                <div *ngFor="let item of sideMenu"><h4><a [routerLink]="[item.title]" [ngStyle]="{'color': item.style}" (click)="handleMenu(item.title, 'side')"><span [ngClass]="item.icon"></span>{{item.title}}</a></h4></div>
+            </div>
+            <div id="top-menu-small" class="layout vertical center">
+                <div *ngFor="let item of topMenu"><h4><a [routerLink]="[item.title]" [ngStyle]="{'color': item.style}" style="padding-left: 10px;" (click)="handleMenu(item.title, 'top')"><span [ngClass]="item.icon"></span>{{item.title}}</a></h4></div>
+            </div>
+        </div>
+    </div>
+
     <div class="layout horizontal center-justified">
         <div class="layout vertical start" id="left-nav-large">
-            <div *ngFor="let item of sideMenu"><h4><a [routerLink]="[item.title]" [ngStyle]="{'color': item.style}" (click)="handleMenu(item.title, 'side')">{{item.title}}</a></h4></div>
+            <div *ngFor="let item of sideMenu"><h4><a [routerLink]="[item.title]" [ngStyle]="{'color': item.style}" (click)="handleMenu(item.title, 'side')"><span [ngClass]="item.icon"></span>{{item.title}}</a></h4></div>
         </div>
 
         <router-outlet></router-outlet>
     </div>
 </div>
+<div id="zoomed" [hidden]="hideZoom" class="layout vertical center popup"><img style="width: 90%; max-height: 1000px;" [src]="zoomImage" (click)="closeZoom()"/>click/tap to close</div>
