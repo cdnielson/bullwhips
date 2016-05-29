@@ -1,11 +1,11 @@
 <div class="content layout vertical start">
     <h3>Cart</h3>
 
-    <div *ngFor="let item of cart.items; let i = index">
-        <div class="row">
-            <div  class="col-md-2">{{item.description}}</div>
-            <div  class="col-md-2">${{item.price}}</div>
-            <div class="col-md-2">
+    <div *ngFor="let item of cart.items; let i = index" style="width: 100%;">
+        <div class="row" style="width: 100%;">
+            <div class="col-md-3">{{item.description}}</div>
+            <div class="col-md-3">${{item.price}}</div>
+            <div class="col-md-3">
                 <select [(ngModel)]="item.quantity" #dropdown (change)="handleQuantityDropdown(item.description, dropdown.value)" >
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -19,7 +19,7 @@
                     <option value="10">10</option>
                 </select>
             </div>
-            <a href="#" class="col-md-6 pointer" (click)="removeItem(item.description)">Delete</a>
+            <a href="#" class="col-md-3 pointer" (click)="removeItem(item.description)">Delete</a>
         </div>
         <hr>
     </div>
@@ -55,8 +55,6 @@
     <div class="layout horizontal center-justified wrap">
         <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right:7px;" (click)="payIt()"/>
         <button class="btn btn-default" style="border-radius: 20px;" (click)="continueShopping()">Continue Shopping</button>
-        <button (click)="printCart()">Print it</button>
-
     </div>
     <br>
     <br>

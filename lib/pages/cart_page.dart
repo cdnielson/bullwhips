@@ -5,6 +5,9 @@ import 'dart:html';
 import 'dart:convert';
 import 'dart:async';
 import 'package:bullwhips/services/cart.dart';
+import 'package:angular2/router.dart';
+import 'package:bullwhips/model/menu.dart';
+import 'package:bullwhips/services/menu_service.dart';
 
 @Component(selector: 'cart-page', templateUrl: 'cart_page.html')
 class CartPage {
@@ -22,10 +25,12 @@ class CartPage {
   int shipping;
   int total;
   //List<Product> cartItems = [];
+  Router _router;
+  MenuService menu;
 
   @Output() EventEmitter page = new EventEmitter<String>();
 
-  CartPage(ProductsService this.productsService, Cart this.cart);
+  CartPage(ProductsService this.productsService, Cart this.cart, Router this._router);
 
   /*ngDoCheck() {
     cartItems = cart.items;
@@ -84,5 +89,13 @@ class CartPage {
     } else {
 
     }
+  }
+
+  continueShopping() {
+    _router.navigate(['WHIPS', {'id': 'whips-page'}]);
+    for (Menu m in menu.items) {
+      m.style = "white";
+    };
+    menu.items.where((Menu element) => element.title == "WHIPS").first.style = "pink";
   }
 }

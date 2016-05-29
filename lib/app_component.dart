@@ -17,9 +17,10 @@ import 'package:bullwhips/pages/accessories_page.dart';
 import 'package:bullwhips/pages/cart_page.dart';
 import 'package:bullwhips/services/products_service.dart';
 import 'package:bullwhips/services/cart.dart';
+import 'package:bullwhips/services/menu_service.dart';
 import 'package:angular2/router.dart';
 
-@Component(selector: 'my-app', providers: const [ProductsService, Cart])
+@Component(selector: 'my-app', providers: const [ProductsService, Cart, MenuService])
 @View(templateUrl: 'app_component.html',
     directives: const [ROUTER_DIRECTIVES] //, ContactPage, HomePage, AboutPage, WhipsPage, AccessoriesPage, CartPage
     )
@@ -35,27 +36,27 @@ class AppComponent {
   String page = "WHIPS";
   String tenOrMore = "one";
   String get pathToLogo => "images/title.png";
-  List<Menu> topMenu = [];
-  List<Menu> sideMenu = [];
   DivElement content;
   bool menuOpened = false;
   String zoomImage = "";
   bool hideZoom = true;
   ProductsService productsService;
-  Router _router;
+  MenuService menu;
+  List<Menu> topMenu = [];
+  List<Menu> sideMenu = [];
 
-  AppComponent(ProductsService this.productsService, Router this._router) {
-    topMenu.add(new Menu("HOME", "white"));
-    topMenu.add(new Menu("ABOUT", "white"));
-    topMenu.add(new Menu("CONTACT", "white"));
-    topMenu.add(new Menu("CART", "white"));
-    sideMenu.add(new Menu("WHIPS", "pink"));
-    sideMenu.add(new Menu("ACCESSORIES", "white"));
+  AppComponent(ProductsService this.productsService, MenuService this.menu) {
+
+    menu.addToMenu("HOME", "white", "top");
+    menu.addToMenu("ABOUT", "white", "top");
+    menu.addToMenu("CONTACT", "white", "top");
+    menu.addToMenu("CART", "white", "top");
+    menu.addToMenu("WHIPS", "pink", "side");
+    menu.addToMenu("ACCESSORIES", "white", "side");
+
+    topMenu = menu.items.where((Menu element) => element.location == "top").toList();
+    sideMenu = menu.items.where((Menu element) => element.location == "side").toList();
     content = querySelector('#content');
-  }
-
-  routeIt() {
-    _router.navigate(['CART', {'id': 'cart-page'}]);
   }
 
   handleMenu(page, menu) {
@@ -80,14 +81,9 @@ class AppComponent {
     window.scrollTo(0, location);
   }
 
-
-  continueShopping() {
-    page = "WHIPS";
-  }
   openMenu() {
     menuOpened = true;
   }
-
   zoom(image) {
     zoomImage = "$productsService.pathToImages$image";
     hideZoom = false;

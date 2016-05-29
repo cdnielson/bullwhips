@@ -3,13 +3,13 @@ import 'package:angular2/angular2.dart';
 
 @Injectable()
 class Cart {
-  List<Product> _cart = [];
+  List<Product> _items = [];
   int _subtotal = 0;
   int _shipping = 0;
   int _total = 0;
 
   List<Product> get items {
-    return _cart;
+    return _items;
   }
   int get subtotal {
     return _subtotal;
@@ -24,19 +24,19 @@ class Cart {
   addToCart(Product product) {
     /*if(!checkIfItemIsInCart(product)) {
       print(product.length);*/
-      _cart.add(product);
-      for(var c in _cart) {
+      _items.add(product);
+      for(var c in _items) {
         print(c.length);
       }
       calculatePrice();
 //    }
   }
   removedFromCart(item) {
-    _cart.removeWhere((Product element) => element.description == item);
+    _items.removeWhere((Product element) => element.description == item);
   }
 
   bool checkIfItemIsInCart(Product item) {
-    for(var c in _cart) {
+    for(var c in _items) {
       if (c.description == item.description) {
         return true;
       }
@@ -46,7 +46,7 @@ class Cart {
 
   calculatePrice() {
     _subtotal = 0;
-    for (Product p in _cart) {
+    for (Product p in _items) {
       _subtotal += p.subtotal;
     }
     if (_subtotal >= 500 || _subtotal == 0) {
