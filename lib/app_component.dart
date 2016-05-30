@@ -13,6 +13,8 @@ import 'package:bullwhips/pages/contact_page.dart';
 import 'package:bullwhips/pages/home_page.dart';
 import 'package:bullwhips/pages/about_page.dart';
 import 'package:bullwhips/pages/whips_page.dart';
+import 'package:bullwhips/pages/custom_page.dart';
+import 'package:bullwhips/pages/in_stock_page.dart';
 import 'package:bullwhips/pages/accessories_page.dart';
 import 'package:bullwhips/pages/cart_page.dart';
 import 'package:bullwhips/services/products_service.dart';
@@ -29,6 +31,8 @@ import 'package:angular2/router.dart';
   const Route(path: '/about-page', name: 'ABOUT', component: AboutPage),
   const Route(path: '/contact-page', name: 'CONTACT', component: ContactPage),
   const Route(path: '/whips-page', name: 'WHIPS', component: WhipsPage),
+  const Route(path: '/custom-page', name: 'CUSTOM', component: CustomPage),
+  const Route(path: '/in-stock-page', name: 'IN STOCK', component: InStockPage),
   const Route(path: '/accessories-page', name: 'ACCESSORIES', component: AccessoriesPage),
   const Route(path: '/cart-page', name: 'CART', component: CartPage)
 ])
@@ -52,6 +56,8 @@ class AppComponent {
     menu.addToMenu("CONTACT", "white", "top", "");
     menu.addToMenu("CART", "white", "top", "glyphicon glyphicon-shopping-cart");
     menu.addToMenu("WHIPS", "white", "side", "");
+    menu.addToMenu("CUSTOM", "white", "side", "");
+    menu.addToMenu("IN STOCK", "white", "side", "");
     menu.addToMenu("ACCESSORIES", "white", "side", "");
 
     topMenu = menu.items.where((Menu element) => element.location == "top").toList();
