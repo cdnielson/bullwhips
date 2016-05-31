@@ -3,7 +3,7 @@
 
     <div *ngFor="let item of cart.items; let i = index" style="width: 100%;">
         <div class="row" style="width: 100%;">
-            <div class="col-md-3">{{item.description}}</div>
+            <div class="col-md-3">{{item.plait}}<br>{{item.description}}<br>{{item.material}}<br>{{item.length}}<br>{{item.notes}}</div>
             <div class="col-md-3">${{item.price}}</div>
             <div class="col-md-3">
                 <select [(ngModel)]="item.quantity" #dropdown (change)="handleQuantityDropdown(item.description, dropdown.value)" >
@@ -54,7 +54,7 @@
 
     <div class="layout horizontal center-justified wrap">
         <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right:7px;" (click)="payIt()"/>
-        <button class="btn btn-default" style="border-radius: 20px;" (click)="continueShopping()">Continue Shopping</button>
+        <button class="btn btn-default" (click)="continueShopping()">Continue Shopping</button>
     </div>
     <br>
     <br>

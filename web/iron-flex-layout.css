@@ -98,6 +98,9 @@ body {
 #window {
     width: 80vw;
 }
+.custom-field {
+    padding: 10px;
+}
 /*******************************
           Flex Layout
 *******************************/

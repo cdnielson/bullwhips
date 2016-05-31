@@ -28,7 +28,7 @@ class WhipsPage {
     /*for (var i in cart.items) {
       print(i.description);
     }*/
-    page.emit("CART");
+    //page.emit("CART");
     routeIt();
   }
 

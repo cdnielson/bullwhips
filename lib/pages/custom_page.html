@@ -1,4 +1,53 @@
 <div class="content layout vertical start">
     <h3>Custom Whips</h3>
-    COMING SOON!
+    <div class="layout horizontal start-justified custom-field">
+        Length:
+        <select [(ngModel)]="length" (change)="handleLengthCost()">
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+    </div>
+    <div class="layout horizontal start-justified custom-field">
+        Color:<select [(ngModel)]="color">
+        <option value="Natural">Natural</option>
+        <option value="Saddletan">Saddle Tan</option>
+        <option value="Whiskey">Whiskey</option>
+        <option value="Brandy">Brandy</option>
+        <option value="Black">Black</option>
+    </select>
+    </div>
+    <div class="layout horizontal start-justified custom-field">
+        End Knot Color:<select [(ngModel)]="endcolor">
+        <option value="Natural">Natural</option>
+        <option value="Saddletan">Saddle Tan</option>
+        <option value="Whiskey">Whiskey</option>
+        <option value="Brandy">Brandy</option>
+        <option value="Black">Black</option>
+    </select>
+    </div>
+    <div class="layout horizontal start-justified custom-field">
+        Ring Knot Color:<select [(ngModel)]="ringcolor">
+        <option value="Natural">Natural</option>
+        <option value="Saddletan">Saddle Tan</option>
+        <option value="Whiskey">Whiskey</option>
+        <option value="Brandy">Brandy</option>
+        <option value="Black">Black</option>
+    </select>
+    </div>
+    <div class="layout horizontal start-justified custom-field">
+        # of Plaits:<select [(ngModel)]="plaits" (change)="handlePlaitsCost()">
+        <option value="12">12</option>
+        <option value="16">16</option>
+        <option value="20">20</option>
+    </select>
+    </div>
+    Cost: ${{cost}}
+    <textarea rows="4" cols="30" placeholder="Notes" id="notes" [(ngModel)]="notes" class="custom-field"></textarea>
+    <button class="btn btn-default custom-field" (click)="handleCustom()">Add To Cart</button>
+
 </div>
