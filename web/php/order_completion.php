@@ -23,11 +23,9 @@
                         $lastname = "";
                         $total = "";
                         $shipping = "";
+                        $id = $_GET['orderId'];
 
-                        $servername = "mysqlcluster15";
-                        $username = "cdnielson";
-                        $password = "Bryony1!";
-                        $dbname = "folkprophetwhips";
+                        include 'bootstrap_db.php';
 
                         // Create connection
                         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -37,7 +35,7 @@
                             die("Connection failed: " . $conn->connect_error);
                         }
 
-                        $sql = "SELECT * FROM order_master WHERE idx='".$_GET['orderId']."'";
+                        $sql = "SELECT * FROM order_master WHERE idx = ('$id')";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {
@@ -52,7 +50,7 @@
                             echo "0 results";
                         }
 
-                        $sql = "SELECT * FROM order_items WHERE order_idx='".$_GET['orderId']."'";
+                        $sql = "SELECT * FROM order_items WHERE order_idx = ('$id')";
                         $result = $conn->query($sql);
                         $itemsArray = array();
                         while($row = mysqli_fetch_assoc($result)) {
@@ -70,14 +68,14 @@
                         //    exit;
 
                             if($_GET['success'] == 'true' && isset($_GET['PayerID']) && isset($_GET['orderId'])) {
-                                $orderId = $_GET['orderId'];
+                                //$orderId = $_GET['orderId'];
                                 try {
                                     //$order = getOrder($orderId);
                                     $payment = executePayment($_GET['paymentId'], $_GET['PayerID']);
                                     //updateOrder($orderId, $payment->getState());
                                     $messageType = "success";
                                     echo "<h3>Thank you</h3>";
-                                    echo "Your payment was successful.<br>Your order id is $orderId<br>";
+                                    echo "Your payment was successful.<br>Your order id is $id<br>";
                                     echo "Order Details:<br>";
                                     echo "Name: " . $firstname . " " . $lastname . "<br><br>";
                                     foreach ($itemsArray as $item) {
@@ -89,6 +87,12 @@
                                     }
                                     echo "Shipping: " . $shipping . "<br>";
                                     echo "Order Total: " . $total;
+
+                                    $sql = "UPDATE order_master SET paid = true WHERE idx = ('$id')";
+                                    if (!mysqli_query($conn, $sql)) {
+                                        die('Error: ' . mysqli_error($conn));
+                                    }
+
                                 } catch (\PayPal\Exception\PPConnectionException $ex) {
                                     echo parseApiError($ex->getData());
                                     echo "error";

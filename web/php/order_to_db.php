@@ -10,10 +10,7 @@ $currency = $jsonData->amounts->currency;
 $shipping = $jsonData->amounts->shipping;
 $total = $jsonData->amounts->total;
 
-$servername = "mysqlcluster15";
-$username = "cdnielson";
-$password = "Bryony1!";
-$dbname = "folkprophetwhips";
+include 'bootstrap_db.php';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

@@ -21,4 +21,4 @@ doc/api/
 *.ipr
 *.iws
 bootstrap.php
-order_to_db.php
+bootstrap_db.php
