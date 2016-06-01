@@ -33,10 +33,10 @@ class WhipsPage {
   }
 
   routeIt() {
-    _router.navigate(['CART', {'id': 'cart-page'}]);
+    _router.navigate(['Cart', {'id': 'cart-page'}]);
     for (Menu m in menu.items) {
       m.style = "white";
     };
-    menu.items.where((Menu element) => element.title == "CART").first.style = "pink";
+    menu.items.where((Menu element) => element.title == "Cart").first.style = "pink";
   }
 }

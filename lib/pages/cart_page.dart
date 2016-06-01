@@ -87,10 +87,10 @@ class CartPage {
   }
 
   continueShopping() {
-    _router.navigate(['WHIPS', {'id': 'whips-page'}]);
+    _router.navigate(['Whips', {'id': 'whips-page'}]);
     for (Menu m in menu.items) {
       m.style = "white";
     };
-    menu.items.where((Menu element) => element.title == "WHIPS").first.style = "pink";
+    menu.items.where((Menu element) => element.title == "Whips").first.style = "pink";
   }
 }
