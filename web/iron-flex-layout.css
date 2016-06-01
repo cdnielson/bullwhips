@@ -1,3 +1,19 @@
+/*Fonts*/
+@font-face {
+    font-family: precious;
+    src: url(fonts/Precious.ttf);
+}
+@font-face {
+    font-family: blkchcry;
+    src: url(fonts/BLKCHCRY.TTF);
+}
+@font-face {
+    font-family: scriptina;
+    src: url(fonts/SCRIPTIN.ttf);
+}
+
+
+
 body {
     margin: 0;
     padding: 0;

@@ -8,7 +8,7 @@ import 'dart:html';
 import 'dart:convert';
 import 'dart:async';
 //import 'dart:io';
-//import 'package:firebase/firebase.dart' as FB;
+import 'package:firebase/firebase.dart' as FB;
 import 'package:bullwhips/pages/contact_page.dart';
 import 'package:bullwhips/pages/home_page.dart';
 import 'package:bullwhips/pages/about_page.dart';
@@ -27,14 +27,14 @@ import 'package:angular2/router.dart';
     directives: const [ROUTER_DIRECTIVES] //, ContactPage, HomePage, AboutPage, WhipsPage, AccessoriesPage, CartPage
     )
 @RouteConfig(const [
-  const Route(path: '/', name: 'HOME', component: HomePage),
-  const Route(path: '/about-page', name: 'ABOUT', component: AboutPage),
-  const Route(path: '/contact-page', name: 'CONTACT', component: ContactPage),
-  const Route(path: '/whips-page', name: 'WHIPS', component: WhipsPage),
-  const Route(path: '/custom-page', name: 'CUSTOM', component: CustomPage),
-  const Route(path: '/in-stock-page', name: 'IN STOCK', component: InStockPage),
-  const Route(path: '/accessories-page', name: 'ACCESSORIES', component: AccessoriesPage),
-  const Route(path: '/cart-page', name: 'CART', component: CartPage)
+  const Route(path: '/', name: 'Home', component: HomePage),
+  const Route(path: '/about-page', name: 'About', component: AboutPage),
+  const Route(path: '/contact-page', name: 'Contact', component: ContactPage),
+  const Route(path: '/whips-page', name: 'Whips', component: WhipsPage),
+  const Route(path: '/custom-page', name: 'Custom', component: CustomPage),
+  const Route(path: '/in-stock-page', name: 'In Stock', component: InStockPage),
+  const Route(path: '/accessories-page', name: 'Accessories', component: AccessoriesPage),
+  const Route(path: '/cart-page', name: 'Cart', component: CartPage)
 ])
 class AppComponent {
   String page = "WHIPS";
@@ -48,21 +48,36 @@ class AppComponent {
   MenuService menu;
   List<Menu> topMenu = [];
   List<Menu> sideMenu = [];
+  String backgroundColor = "green";
+  FB.Firebase firebase;
+  String fontStyle = "serif";
+  String fontColor = "black";
+  String menuFontColor = "white";
+  String fontSize = "medium";
 
   AppComponent(ProductsService this.productsService, MenuService this.menu) {
-
-    menu.addToMenu("HOME", "pink", "top", "");
-    menu.addToMenu("ABOUT", "white", "top", "");
-    menu.addToMenu("CONTACT", "white", "top", "");
-    menu.addToMenu("CART", "white", "top", "glyphicon glyphicon-shopping-cart");
-    menu.addToMenu("WHIPS", "white", "side", "");
-    menu.addToMenu("CUSTOM", "white", "side", "");
-    menu.addToMenu("IN STOCK", "white", "side", "");
-    menu.addToMenu("ACCESSORIES", "white", "side", "");
+    menu.addToMenu("Home", "pink", "top", "");
+    menu.addToMenu("About", "white", "top", "");
+    menu.addToMenu("Contact", "white", "top", "");
+    menu.addToMenu("Cart", "white", "top", "glyphicon glyphicon-shopping-cart");
+    menu.addToMenu("Whips", "white", "side", "");
+    menu.addToMenu("Custom", "white", "side", "");
+    menu.addToMenu("In Stock", "white", "side", "");
+    menu.addToMenu("Accessories", "white", "side", "");
 
     topMenu = menu.items.where((Menu element) => element.location == "top").toList();
     sideMenu = menu.items.where((Menu element) => element.location == "side").toList();
     content = querySelector('#content');
+
+    firebase = new FB.Firebase("https://project-1521535102720286769.firebaseio.com");
+//    firebase = new FB.Firebase("https://glowing-torch-7653.firebaseIO.com");
+    print("here");
+    firebase.onValue.listen((event){
+     var temp = event.snapshot.val();
+     List<Map> mapList = temp.values.toList();
+     print("here");
+     print(mapList);
+    });
   }
 
   handleMenu(page, menu) {
@@ -96,5 +111,20 @@ class AppComponent {
   }
   closeZoom() {
     hideZoom = true;
+  }
+  handleFontChange(font) {
+    print(font);
+    fontStyle = font;
+  }
+  handleFontColorChange(color) {
+    fontColor = color;
+  }
+  handleMenuFontColorChange(color) {
+    for(var m in menu.items) {
+      m.style = color;
+    }
+  }
+  handleFontSizeChange(size) {
+    fontSize = size;
   }
 }

@@ -1,33 +1,78 @@
-<div id="main" class="layout vertical center">
-    <img [src]="pathToLogo" style="width: 100%; max-width: 1000px; padding-top:10px;" class="center-block"/>
-    <div class="layout horizontal end-justified" id="top-menu-large">
-        <div *ngFor="let item of topMenu"><h4><a [routerLink]="[item.title]" [ngStyle]="{'color': item.style}" style="padding-left: 10px;" (click)="handleMenu(item.title, 'top')"><span [ngClass]="item.icon"></span>{{item.title}}</a></h4></div>
-    </div>
+<div id="customize" class="layout horizontal center-justified wrap" style="background: white; border: 1px solid black; padding: 3px;">
+    Font style:
+    <select [(ngModel)]="fontStyle" #fontdropdown (change)="handleFontChange(fontdropdown.value)">
+        <option value="serif">Serif</option>
+        <option value="sans-serif">Sans Serif</option>
+        <option value="cursive">Cursive</option>
+        <option value="fantasy">Fantasy</option>
+        <option value="scriptina">Scriptina</option>
+        <option value="precious">Precious Regular</option>
+        <option value="blkchcry">Black Chancery</option>
+    </select>
+    Menu font-color:
+    <select [(ngModel)]="menuFontColor" #menufontcolordropdown (change)="handleMenuFontColorChange(menufontcolordropdown.value)">
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+        <option value="black">Black</option>
+        <option value="white">White</option>
+        <option value="gray">Gray</option>
+        <option value="yellow">Yellow</option>
+        <option value="green">Green</option>
+    </select>
+    Content font-color:
+    <select [(ngModel)]="fontColor" #fontcolordropdown (change)="handleFontColorChange(fontcolordropdown.value)">
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+        <option value="black">Black</option>
+        <option value="white">White</option>
+        <option value="gray">Gray</option>
+        <option value="yellow">Yellow</option>
+        <option value="green">Green</option>
+    </select>
+    Font-size:
+    <select [(ngModel)]="fontSize" #fontsizedropdown (change)="handleFontSizeChange(fontsizedropdown.value)">
+        <option value="medium">Medium</option>
+        <option value="xx-small">Xx-Small</option>
+        <option value="x-small">X-Small</option>
+        <option value="small">Small</option>
+        <option value="large">Large</option>
+        <option value="x-large">X-Large</option>
+        <option value="xx-large">Xx-Large</option>
+    </select>
+</div>
+<div [ngStyle]="{'font-family':fontStyle, 'color':fontColor, 'font-size':fontSize}">
 
-    <div id="menus-small">
-        <div [hidden]="menuOpened">
-            <div (click)="openMenu()" style="padding-bottom: 10px;">
-                <div class="hamburger"></div>
-                <div class="hamburger"></div>
-                <div class="hamburger"></div>
+    <div id="main" class="layout vertical center">
+        <img [src]="pathToLogo" style="width: 100%; max-width: 1000px; padding-top:10px;" class="center-block"/>
+        <div class="layout horizontal end-justified" id="top-menu-large">
+            <div *ngFor="let item of topMenu"><h4><a [routerLink]="[item.title]" [ngStyle]="{'color': item.style}" style="padding-left: 10px;" (click)="handleMenu(item.title, 'top')"><span [ngClass]="item.icon"></span>{{item.title}}</a></h4></div>
+        </div>
+
+        <div id="menus-small">
+            <div [hidden]="menuOpened">
+                <div (click)="openMenu()" style="padding-bottom: 10px;">
+                    <div class="hamburger"></div>
+                    <div class="hamburger"></div>
+                    <div class="hamburger"></div>
+                </div>
+            </div>
+            <div [hidden]="!menuOpened">
+                <div id="left-nav-small" class="layout vertical center">
+                    <div *ngFor="let item of sideMenu"><h4><a [routerLink]="[item.title]" [ngStyle]="{'color': item.style}" (click)="handleMenu(item.title, 'side')"><span [ngClass]="item.icon"></span>{{item.title}}</a></h4></div>
+                </div>
+                <div id="top-menu-small" class="layout vertical center">
+                    <div *ngFor="let item of topMenu"><h4><a [routerLink]="[item.title]" [ngStyle]="{'color': item.style}" style="padding-left: 10px;" (click)="handleMenu(item.title, 'top')"><span [ngClass]="item.icon"></span>{{item.title}}</a></h4></div>
+                </div>
             </div>
         </div>
-        <div [hidden]="!menuOpened">
-            <div id="left-nav-small" class="layout vertical center">
+
+        <div class="layout horizontal center-justified">
+            <div class="layout vertical start" id="left-nav-large">
                 <div *ngFor="let item of sideMenu"><h4><a [routerLink]="[item.title]" [ngStyle]="{'color': item.style}" (click)="handleMenu(item.title, 'side')"><span [ngClass]="item.icon"></span>{{item.title}}</a></h4></div>
             </div>
-            <div id="top-menu-small" class="layout vertical center">
-                <div *ngFor="let item of topMenu"><h4><a [routerLink]="[item.title]" [ngStyle]="{'color': item.style}" style="padding-left: 10px;" (click)="handleMenu(item.title, 'top')"><span [ngClass]="item.icon"></span>{{item.title}}</a></h4></div>
-            </div>
+
+            <router-outlet></router-outlet>
         </div>
     </div>
-
-    <div class="layout horizontal center-justified">
-        <div class="layout vertical start" id="left-nav-large">
-            <div *ngFor="let item of sideMenu"><h4><a [routerLink]="[item.title]" [ngStyle]="{'color': item.style}" (click)="handleMenu(item.title, 'side')"><span [ngClass]="item.icon"></span>{{item.title}}</a></h4></div>
-        </div>
-
-        <router-outlet></router-outlet>
-    </div>
+    <div id="zoomed" [hidden]="hideZoom" class="layout vertical center popup"><img style="width: 90%; max-height: 1000px;" [src]="zoomImage" (click)="closeZoom()"/>click/tap to close</div>
 </div>
-<div id="zoomed" [hidden]="hideZoom" class="layout vertical center popup"><img style="width: 90%; max-height: 1000px;" [src]="zoomImage" (click)="closeZoom()"/>click/tap to close</div>
