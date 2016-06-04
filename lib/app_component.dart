@@ -20,11 +20,13 @@ import 'package:bullwhips/pages/cart_page.dart';
 import 'package:bullwhips/services/products_service.dart';
 import 'package:bullwhips/services/cart.dart';
 import 'package:bullwhips/services/menu_service.dart';
+import 'package:bullwhips/services/settings.dart';
 import 'package:angular2/router.dart';
+import 'package:bullwhips/components/edit_controls.dart';
 
-@Component(selector: 'my-app', providers: const [ProductsService, Cart, MenuService])
+@Component(selector: 'my-app', providers: const [ProductsService, Cart, MenuService, Settings])
 @View(templateUrl: 'app_component.html',
-    directives: const [ROUTER_DIRECTIVES] //, ContactPage, HomePage, AboutPage, WhipsPage, AccessoriesPage, CartPage
+    directives: const [ROUTER_DIRECTIVES, EditControls] //, ContactPage, HomePage, AboutPage, WhipsPage, AccessoriesPage, CartPage
     )
 @RouteConfig(const [
   const Route(path: '/', name: 'Home', component: HomePage),
@@ -50,12 +52,10 @@ class AppComponent {
   List<Menu> sideMenu = [];
   String backgroundColor = "green";
   FB.Firebase firebase;
-  String fontStyle = "serif";
-  String fontColor = "black";
-  String menuFontColor = "white";
-  String fontSize = "medium";
+  Settings settings;
+  bool showPageControls = false;
 
-  AppComponent(ProductsService this.productsService, MenuService this.menu) {
+  AppComponent(ProductsService this.productsService, MenuService this.menu, Settings this.settings) {
     menu.addToMenu("Home", "pink", "top", "");
     menu.addToMenu("About", "white", "top", "");
     menu.addToMenu("Contact", "white", "top", "");
@@ -112,19 +112,7 @@ class AppComponent {
   closeZoom() {
     hideZoom = true;
   }
-  handleFontChange(font) {
-    print(font);
-    fontStyle = font;
-  }
-  handleFontColorChange(color) {
-    fontColor = color;
-  }
-  handleMenuFontColorChange(color) {
-    for(var m in menu.items) {
-      m.style = color;
-    }
-  }
-  handleFontSizeChange(size) {
-    fontSize = size;
+  showHidePageControls() {
+    showPageControls = !showPageControls;
   }
 }
