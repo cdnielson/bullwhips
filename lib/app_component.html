@@ -1,8 +1,9 @@
-<div (click)="showHidePageControls()" [style.color]="settings.menuFontColor">Site Settings+</div>
-<div *ngIf="showPageControls">
-    <edit-controls></edit-controls>
-</div>
-<div [ngStyle]="{'font-family':settings.fontStyle, 'color':settings.fontColor, 'font-size':settings.fontSize, 'background-color':settings.backgroundColor}">
+<!--<div (click)="showHidePageControls()" [style.color]="settings.menuFontColor">Site Settings+</div>-->
+<!--<div *ngIf="showPageControls">-->
+<!--<edit-controls></edit-controls>-->
+<!--</div>-->
+<div id="homeSplash"></div>
+<div [ngStyle]="{'font-family':settings.fontStyle, 'color':settings.fontColor, 'font-size':settings.fontSize">
 
     <div id="main" class="layout vertical center">
         <img [src]="pathToLogo" style="width: 100%; max-width: 1000px; padding-top:10px;" class="center-block"/>
