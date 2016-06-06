@@ -12,7 +12,39 @@
     src: url(fonts/SCRIPTIN.ttf);
 }
 
+#homeBack {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: dimgray;
+    z-index: 100;
+}
 
+#homeSplash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /*opacity: .5;*/
+    z-index: 200;
+    background: none;
+}
+
+#top-menu-new {
+    position: fixed;
+    left: 0;
+    top: 1%;
+    width: 100%;
+    /*transform: translate(-50%);*/
+    z-index: 10000;
+}
+
+.home-title-text {
+    font-size: 80px;
+}
 
 body {
     margin: 0;
@@ -21,10 +53,13 @@ body {
     color: black;
     font-family: Verdana, Geneva, sans-serif;
 
-    background: -webkit-linear-gradient(left,  #3B2200, #A8742A, #85530F, #A8742A, #85530F,  #3B2200);
+/*    background: -webkit-linear-gradient(left,  #3B2200, #A8742A, #85530F, #A8742A, #85530F,  #3B2200);
     background: -o-linear-gradient(right,  #3B2200, #A8742A, #85530F, #A8742A, #85530F,  #3B2200);
     background: -moz-linear-gradient(right,  #3B2200, #A8742A, #85530F, #A8742A, #85530F,  #3B2200);
-    background: linear-gradient(to right,  #3B2200, #A8742A, #85530F, #A8742A, #85530F,  #3B2200);
+    background: linear-gradient(to right,  #3B2200, #A8742A, #85530F, #A8742A, #85530F,  #3B2200);*/
+
+    background-image: url('images/home.jpg');
+    background-size: cover;
 }
 #left-nav-large {
     display: flex;

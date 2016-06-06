@@ -50,21 +50,27 @@ class AppComponent {
   MenuService menu;
   List<Menu> topMenu = [];
   List<Menu> sideMenu = [];
+  List<Menu> newMenu = [];
   String backgroundColor = "green";
   FB.Firebase firebase;
   Settings settings;
   bool showPageControls = false;
+  String get pathToHomeImage => 'images/home.jpg';
+  bool hideSplash = false;
+  Menu homeMenu;
+  Menu cartMenu;
 
   AppComponent(ProductsService this.productsService, MenuService this.menu, Settings this.settings) {
-    menu.addToMenu("Home", "pink", "top", "");
+    menu.addToMenu("Home", "pink", "home", "");
     menu.addToMenu("About", "white", "top", "");
     menu.addToMenu("Contact", "white", "top", "");
-    menu.addToMenu("Cart", "white", "top", "glyphicon glyphicon-shopping-cart");
+    menu.addToMenu("Cart", "white", "cart", "glyphicon glyphicon-shopping-cart");
     menu.addToMenu("Whips", "white", "side", "");
     menu.addToMenu("Custom", "white", "side", "");
     menu.addToMenu("In Stock", "white", "side", "");
     menu.addToMenu("Accessories", "white", "side", "");
-
+    homeMenu = menu.items.where((Menu element) => element.location == "home").first;
+    cartMenu = menu.items.where((Menu element) => element.location == "cart").first;
     topMenu = menu.items.where((Menu element) => element.location == "top").toList();
     sideMenu = menu.items.where((Menu element) => element.location == "side").toList();
     content = querySelector('#content');
@@ -81,6 +87,7 @@ class AppComponent {
   }
 
   handleMenu(page, menu) {
+    hideSplash = true;
     this.page = page;
     for (Menu t in topMenu) {
       t.style = "white";
